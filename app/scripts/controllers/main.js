@@ -69,8 +69,11 @@ angular.module('emptyChairWidgetApp')
                 }
             }
         };
+        var dataGenerator = {
+        	data: sinAndCos
+        };
 
-        $scope.data = sinAndCos();
+        $scope.data = dataGenerator.data;
 
         /*Random Data Generator */
         function sinAndCos() {
@@ -81,7 +84,7 @@ angular.module('emptyChairWidgetApp')
             for (var i = 0; i < 100; i++) {
                 sin.push({x: i, y: Math.sin(i/10)});
                 sin2.push({x: i, y: i % 10 == 5 ? null : Math.sin(i/10) *0.25 + 0.5});
-                cos.push({x: i, y: .5 * Math.cos(i/10+ 2) + Math.random() / 10});
+                cos.push({x: i, y: .5 * Math.cos(i/10+ 2) + Math.random() / 5});
             }
 
             //Line chart data should be sent as an array of series objects.
