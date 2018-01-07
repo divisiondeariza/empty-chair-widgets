@@ -1,76 +1,16 @@
-/* latin */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(https://fonts.gstatic.com/s/josefinsans/v12/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
-}
-
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(https://fonts.gstatic.com/s/josefinsans/v12/C6HYlRF50SGJq1XyXj04z04GofcKVZz6wtzX_QUIqsI.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
-}
-
 body{
 	background-color:black;
 	color:white;
-
 }
 
-.widget-action-button{
-	background-image: url("../images/action-btn-bg.png");
-	background-repeat: no-repeat;
-	background-size: 100%;
-	background-color: white;
-	width: 100%;
-	max-width: 600px;
-    padding-bottom: 100%;
+/* .widget-container{
+	max-width: 1170px;
 
-}
+} */
 
-.widget-action-button-content{
-	padding: 3%;
-	text-align: center;
-	font-family: 'Josefin Sans', sans-serif;
-
-	h1{
-		text-align: center;
-		font-size: 7vw;
-		margin-top: 3vw;
-		margin-bottom: 0;
-	}
-
-	#action-button-animated-logo{
-		width: 80%;
-	}
-	#action-button-text-logo{
-		width: 50%;
-	}
-	p{
-		padding-top: 7%;
-		padding-left: 1%;
-		padding-right: 1%;
-		font-size: 4.5vw;
-		z-index: 10;
-		font-weight: 300;
-		line-height: initial;
+@media screen and (min-width: 1160px) {
+	.widget-container{
+		max-width: 95%;
 
 	}
-
-	button{
-		color: black;
-		width: 50%;
-		padding-left: 0;
-		padding-right: 0;
-
-    	span{
-    		height: 8vw;
-			font-size:5vw;
-    	}
-
-	}
-}
+ }
