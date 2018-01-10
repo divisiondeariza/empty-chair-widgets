@@ -9,9 +9,9 @@
 angular.module('emptyChairWidgetApp')
   .directive('multiwordSelect', function () {
     return {
-      template: '<div></div>',
+      //template: '<div></div>',
       
-      //templateUrl:'templates/directives/multiword-select.html',
+      templateUrl:'templates/directives/multiword-select.html',
       restrict: 'E',
       scope: {
          words: '<',

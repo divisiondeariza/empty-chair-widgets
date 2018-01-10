@@ -17,6 +17,18 @@ module.exports = function(config) {
       'jasmine'
     ],
 
+    preprocessors: {
+      'app/templates/**/*.html': ['ng-html2js']
+    },
+
+    ngHtml2JsPreprocessor: {
+        stripPrefix: "app/",
+        //
+        // Make up a module name to contain your templates.
+        // We will use this name in the jasmine test code.
+        // For advanced configs, see https://github.com/karma-runner/karma-ng-html2js-preprocessor
+        moduleName: 'my.templates',
+    },
     // list of files / patterns to load in the browser
     files: [
       // bower:js
@@ -36,7 +48,8 @@ module.exports = function(config) {
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      'app/templates/**/*.html',
     ],
 
     // list of files / patterns to exclude
@@ -61,7 +74,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-ng-html2js-preprocessor'
     ],
 
     // Continuous Integration mode

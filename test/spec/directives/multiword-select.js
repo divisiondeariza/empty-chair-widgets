@@ -4,6 +4,7 @@ describe('Directive: multiwordSelect', function () {
 
   // load the directive's module
   beforeEach(module('emptyChairWidgetApp'));
+  beforeEach(module('my.templates'));
 
   var element,
   scope;
@@ -19,6 +20,7 @@ describe('Directive: multiwordSelect', function () {
       element = angular.element('<multiword-select words=words selected = sel></multiword-select>');
       element = $compile(element)(scope);
       scope.$digest(); 
+
 
     }));
 
