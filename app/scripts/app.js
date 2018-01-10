@@ -35,6 +35,11 @@ angular
         controller: 'ActionbtnCtrl',
         controllerAs: 'actionbtn'
       })
+      .when('/widgets/vargas-lleras-discurso', {
+        templateUrl: 'views/wg-vargas-lleras-discurso.html',
+        controller: 'WgVargasLlerasDiscursoCtrl',
+        controllerAs: 'wgVargasLlerasDiscurso'
+      })
       .otherwise({
         redirectTo: '/'
       });
