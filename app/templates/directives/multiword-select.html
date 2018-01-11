@@ -1,2 +1,21 @@
+<div class="multiword-select container">
+	<div class="row multiword-content">
+		<div class="col-lg-6 category" ng-repeat="category in categories">
+			<fieldset>
+				<legend ng-bind="category"></legend>
+				<div class="row">
+					<div class="col-lg-3" ng-repeat="wordData in words| filter:category:true:category">
+						<a ng-bind="wordData.word"
+						   ng-class="isSelected(wordData)?'selected':''"
+							ng-click="toggleWord(wordData)">
+							
+						</a>
+					</div>
+				</div>
+			</fieldset>			
+		</div>
+	</div>
 
+
+</div>
 

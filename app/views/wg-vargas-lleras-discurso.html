@@ -1,14 +1,15 @@
-<p>This is the wg-vargas-lleras-discurso view.</p>
 <div class="row">
   <div class="container-fluid widget-container">
-    <h1>¿Cómo se ha transformado el discursode Vargas Lleras?</h1>
+    <h1>¿Cómo se ha transformado el discurso de Vargas Lleras?</h1>
     <p>
       Seleccione hasta 7 términos y estudie su evolución en el tiempo...
     </p>
 
     <div class="row">
-
-      <multiword-select></multiword-select>
+      {{selectedWords}}
+      <multiword-select words=words selected-words = selectedWords>
+        
+      </multiword-select>
 <!--       <div class="col-sm-6">
           <nvd3 options="options" data="data" class="with-3d-shadow with-transitions"></nvd3> 
       </div>
