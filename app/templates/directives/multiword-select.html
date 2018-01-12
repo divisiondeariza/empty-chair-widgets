@@ -1,4 +1,10 @@
 <div class="multiword-select container">
+	<div uib-alert ng-repeat="alert in alerts" 
+		 class="alert-danger"
+		 close="closeAlert($index)"
+		 dismiss-on-timeout=2000>
+
+		{{alert.msg}}</div>
 	<div class="row multiword-content">
 		<div class="col-lg-6 category" ng-repeat="category in categories">
 			<fieldset>

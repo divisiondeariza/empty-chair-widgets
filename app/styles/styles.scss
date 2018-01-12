@@ -19,6 +19,22 @@ body{
 		width: 100%;
 
 	}
+	
+    .alert-danger.ng-enter,
+    .alert-danger.ng-leave {
+      -webkit-transition: 0.5s linear all;
+      transition: 0.5s linear all;
+    }
+
+	.alert-danger.ng-enter,
+    .alert-danger.ng-leave.ng-leave-active {
+      opacity: 0;
+    }
+    
+    .alert-danger.ng-leave,
+    .alert-danger.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
 
 	a:hover{
 		font-weight: bold;
@@ -63,16 +79,8 @@ body{
 					border-bottom-color: #ccc;
 					border-bottom-style: solid;
 				}
-
 			}
-
 			&:nth-child(odd){
-/* 				.row{
-					border-right-width: 1px;
-					border-right-color: #ccc;
-					border-right-style: solid;
-				} */
-
 				.row:before{
 					right: 0;
 				}

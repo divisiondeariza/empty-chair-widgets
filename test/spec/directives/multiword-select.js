@@ -74,6 +74,65 @@ describe('Directive: multiwordSelect', function () {
       expect(element.isolateScope().isSelected({word:"alpha"})).toBeTruthy();
     });
 
+  });
+
+  describe('Only allow select up to limit', function(){
+    beforeEach(inject(function ($rootScope, $compile) {
+      scope = $rootScope.$new();
+      scope.words = [{word:"alpha", category:"a"}, 
+                     {word:"beta", category:"b"},
+                     {word:"gamma", category:"b"},
+                     {word:"delta", category:"b"}];
+      scope.sel = [];
+      scope.error="mal hermano";
+      element = angular.element('<multiword-select words=words selected-words = sel select-limit=2 limit-reached-msg="error"></multiword-select>');
+      element = $compile(element)(scope);
+      scope.$digest(); 
+    }));
+
+    it("should not add more elements when reached limit", function(){
+        element.isolateScope().toggleWord({word:"alpha"});
+        element.isolateScope().toggleWord({word:"beta"});
+        element.isolateScope().toggleWord({word:"gamma"});
+        expect(scope.sel.length).toBe(2);
+    });
+
+    it("should send alert when limit reached",function(){
+        element.isolateScope().toggleWord({word:"alpha"});
+        element.isolateScope().toggleWord({word:"beta"});
+        element.isolateScope().toggleWord({word:"gamma"});
+        expect(element.isolateScope().alerts[0]).toEqual({msg:'error'});      
+    })
+
+    it("should not send alert when limit not reached",function(){
+        element.isolateScope().toggleWord({word:"alpha"});
+        element.isolateScope().toggleWord({word:"beta"});
+        expect(element.isolateScope().alerts.length).toBe(0);      
+    })
+
+    it("should delete alert when closeAlert Called",function(){
+        element.isolateScope().toggleWord({word:"alpha"});
+        element.isolateScope().toggleWord({word:"beta"});
+        element.isolateScope().toggleWord({word:"gamma"});
+        element.isolateScope().closeAlert(0);
+        expect(element.isolateScope().alerts.length).toBe(0);      
+
+            
+    })
+
+
+    it("should not limit selected if not limit given", inject(function($compile){
+      element = angular.element('<multiword-select words=words selected-words = sel></multiword-select>');
+      element = $compile(element)(scope);
+      scope.$digest();      
+      element.isolateScope().toggleWord({word:"alpha"});
+      element.isolateScope().toggleWord({word:"beta"});
+      element.isolateScope().toggleWord({word:"gamma"});
+      expect(scope.sel).toContain({word:"gamma"});
+    }))
+
+
+
   })
 
 
