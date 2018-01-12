@@ -17,9 +17,11 @@ angular
     'ngSanitize',
     'ngTouch',
     'nvd3',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'restangular'
   ])
-  .config(function ($routeProvider) {
+  .config(["RestangularProvider", "$routeProvider",
+    function (RestangularProvider, $routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -44,4 +46,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+
+    RestangularProvider.setBaseUrl("/data/");
+    RestangularProvider.setRequestSuffix('.json');
+  }]);

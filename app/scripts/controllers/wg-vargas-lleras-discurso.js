@@ -8,13 +8,15 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", function ($scope) {
+  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "Restangular", 
+    function ($scope, $http, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
+    //$scope.data = Restangular.one("vargas-lleras-words").get();
     $scope.selectedWords = [];
     $scope.words = [
     				{word:"alpha", category:"a"}, 
