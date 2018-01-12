@@ -102,6 +102,14 @@ describe('Directive: multiwordSelect', function () {
         element.isolateScope().toggleWord({word:"beta"});
         element.isolateScope().toggleWord({word:"gamma"});
         expect(element.isolateScope().alerts[0]).toEqual({msg:'error'});      
+    });
+
+    it("should send only one alert",function(){
+        element.isolateScope().toggleWord({word:"alpha"});
+        element.isolateScope().toggleWord({word:"beta"});
+        element.isolateScope().toggleWord({word:"gamma"});
+        element.isolateScope().toggleWord({word:"gamma"});
+        expect(element.isolateScope().alerts.length).toBe(1);      
     })
 
     it("should not send alert when limit not reached",function(){
@@ -129,11 +137,6 @@ describe('Directive: multiwordSelect', function () {
       element.isolateScope().toggleWord({word:"beta"});
       element.isolateScope().toggleWord({word:"gamma"});
       expect(scope.sel).toContain({word:"gamma"});
-    }))
-
-
-
-  })
-
-
+    }));
+  });
 });
