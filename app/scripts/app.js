@@ -17,11 +17,10 @@ angular
     'ngSanitize',
     'ngTouch',
     'nvd3',
-    'ui.bootstrap',
-    'restangular'
+    'ui.bootstrap'
   ])
-  .config(["RestangularProvider", "$routeProvider",
-    function (RestangularProvider, $routeProvider) {
+  .config(["$routeProvider",
+    function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -42,16 +41,15 @@ angular
         templateUrl: 'views/wg-vargas-lleras-discurso.html',
         controller: 'WgVargasLlerasDiscursoCtrl',
         controllerAs: 'wgVargasLlerasDiscurso',
-        resolve:{"data": function(Restangular){
-          return Restangular.one("vargas-lleras-words").get()
+        resolve:{"vlldata": function($http){
+          return $http({method: 'GET', url: '/data/vargas-lleras-words.json'})
+                      .then(function(response){
+                        return response.data;
+                      });
           } 
         },
-        resolveAs:"data",
       })
       .otherwise({
         redirectTo: '/'
       });
-
-    RestangularProvider.setBaseUrl("/data/");
-    RestangularProvider.setRequestSuffix('.json');
   }]);
