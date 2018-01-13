@@ -41,7 +41,12 @@ angular
       .when('/widgets/vargas-lleras-discurso', {
         templateUrl: 'views/wg-vargas-lleras-discurso.html',
         controller: 'WgVargasLlerasDiscursoCtrl',
-        controllerAs: 'wgVargasLlerasDiscurso'
+        controllerAs: 'wgVargasLlerasDiscurso',
+        resolve:{"data": function(Restangular){
+          return Restangular.one("vargas-lleras-words").get()
+          } 
+        },
+        resolveAs:"data",
       })
       .otherwise({
         redirectTo: '/'
