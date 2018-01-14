@@ -19,8 +19,8 @@ angular.module('emptyChairWidgetApp')
     //$scope.data = Restangular.one("vargas-lleras-words").get();
     $scope.selectedWords = [];
     $scope.words = Object.keys(vlldata.words)
-    .map(function(element){
-      return {word:element, category:Math.floor(Math.random() * 4) + 1} ;
+    .map(function(element, index){
+      return {word:element, category:index%4} ;
     });
 /*    $scope.words = [
     				{word:"alpha", category:"a"}, 
