@@ -8,8 +8,8 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "vlldata", 
-    function ($scope, $http, vlldata) {
+  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "data", 
+    function ($scope, $http, data) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -18,7 +18,7 @@ angular.module('emptyChairWidgetApp')
 
     //$scope.data = Restangular.one("vargas-lleras-words").get();
     $scope.selectedWords = [];
-    $scope.words = Object.keys(vlldata.words)
+    $scope.words = Object.keys(data.words)
     .map(function(element, index){
       return {word:element, category:index%4} ;
     });
