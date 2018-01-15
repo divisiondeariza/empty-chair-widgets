@@ -49,7 +49,7 @@
 			}
 		}
 
-		@media (min-width: 1200px) {
+/* 		@media (min-width: 1200px) {
 			.row{
 				margin-bottom: 20px;
 			}
@@ -79,13 +79,17 @@
 				}
 			}
 
-		}
+		} */
 
 	}
 
 	.multiword-content{ 
 		.category{
-			&:nth-child(odd){
+			fieldset{
+				margin-left: 10px;
+				margin-right: 10px;}
+			// &:nth-child(odd){
+			&:nth-child(1){
 
 				border-right-width: 1px;
 				border-right-color: #ccc;

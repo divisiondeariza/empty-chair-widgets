@@ -24,7 +24,7 @@ angular.module('emptyChairWidgetApp')
     $scope.selectedWords = [];
     $scope.words = Object.keys(data.words)
     .map(function(element, index){
-      return {word:element, category:index%4} ;
+      return {word:element, category:data.words[element].tag} ;
     });
     $scope.d3data = $scope.words.map(function(wordData) {
          var element = data.words[wordData.word]

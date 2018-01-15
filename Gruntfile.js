@@ -52,9 +52,6 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'postcss:server']
       },
-      //json:{
-      //  files: ['<%= yeoman.app %>/files/{,*/}*.{json}'],
-      //},
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -66,7 +63,6 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-         // '<%= yeoman.app %>/files/{,*/}*.{json}'
         ]
       }
     },
@@ -419,8 +415,8 @@ module.exports = function (grunt) {
             '*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
-            //'files/*',
-            //'templates/{,*/}*.*'
+            'files/*',
+            'templates/{,*/}*.*'
           ]
         }, {
           expand: true,
