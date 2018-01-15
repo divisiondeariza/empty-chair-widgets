@@ -41,8 +41,9 @@ angular
         templateUrl: 'views/wg-vargas-lleras-discurso.html',
         controller: 'WgVargasLlerasDiscursoCtrl',
         controllerAs: 'wgVargasLlerasDiscurso',
-        resolve:{"data": function(jsonGetter){
-          return jsonGetter.get('vargas-lleras-words');          } 
+        resolve:{
+          data: function(jsonGetter){ return jsonGetter.get('data/vargas-lleras-words');},
+          options: function(jsonGetter){ return jsonGetter.get('options/vargas-lleras-words.conf');} 
         },
       })
       .otherwise({

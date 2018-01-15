@@ -10,7 +10,7 @@
 angular.module('emptyChairWidgetApp')
   .service('jsonGetter', ["$http", function ($http) {
   	this.get = function(filename){
-  		return $http({method: 'GET', url: '/data/' + filename+'.json'})
+  		return $http({method: 'GET', url: 'files/' + filename+'.json'})
 					.then(function(response){
                         return response.data;
                       });

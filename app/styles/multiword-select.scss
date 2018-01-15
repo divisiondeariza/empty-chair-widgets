@@ -1,0 +1,99 @@
+.multiword-select{
+	a{
+		color:#909090;
+		font-size: 16px;
+		text-align: center;
+		cursor: pointer;
+		width: 100%;
+
+	}
+	
+    .alert-danger.ng-enter,
+    .alert-danger.ng-leave {
+      -webkit-transition: 0.5s linear all;
+      transition: 0.5s linear all;
+    }
+
+	.alert-danger.ng-enter,
+    .alert-danger.ng-leave.ng-leave-active {
+      opacity: 0;
+    }
+    
+    .alert-danger.ng-leave,
+    .alert-danger.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
+
+	a:hover{
+		font-weight: bold;
+		text-decoration: none;
+		letter-spacing: 1px;
+	}
+
+	.selected{
+		color: white;
+	}
+
+	legend{
+		border-bottom-width: 0;
+		text-align: center;
+		color:#ddd;
+		margin-bottom:5px;
+
+	}
+
+	.category{
+		.row{
+			div{
+				text-align: center;
+			}
+		}
+
+		@media (min-width: 1200px) {
+			.row{
+				margin-bottom: 20px;
+			}
+			//all except last two
+			&:not(:nth-last-child(-n + 2)){
+				.row:before{
+					content : "";
+					position: absolute;
+					bottom  : 0;
+					height  : 1px;
+					width   : 30%;  
+					border-bottom:1px solid magenta;
+					padding-bottom: 5px;
+					border-bottom-width: 1px;
+					border-bottom-color: #ccc;
+					border-bottom-style: solid;
+				}
+			}
+			&:nth-child(odd){
+				.row:before{
+					right: 0;
+				}
+			}
+			&:nth-child(even){
+				.row:before{
+					left: 0;
+				}
+			}
+
+		}
+
+	}
+
+	.multiword-content{ 
+		.category{
+			&:nth-child(odd){
+
+				border-right-width: 1px;
+				border-right-color: #ccc;
+				border-right-style: solid;
+			}
+		}
+
+	}
+
+
+}

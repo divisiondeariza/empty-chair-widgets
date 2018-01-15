@@ -1,0 +1,50 @@
+{
+    "chart": {
+        "type": "lineChart",
+        "height": 450,
+        "margin": {
+            "top": 20,
+            "right": 20,
+            "bottom": 40,
+            "left": 55
+        },
+        "useInteractiveGuideline": true,
+        "dispatch": {},
+        "xAxis": {
+            "axisLabel": "Frecuencia"
+        },
+        "yAxis": {
+            "axisLabel": "Fecha",
+            "axisLabelDistance": -10
+        },
+        "color": [
+            "#fde01c",
+            "#f29520",
+            "#f172a0",
+            "#e63948",
+            "#887ee0",
+            "#44a650",
+            "#30a2c9"
+        ]
+    },
+    "title": {
+        "enable": false,
+        "text": "Title for Line Chart"
+    },
+    "subtitle": {
+        "enable": false,
+        "text": "Subtitle for simple line chart. Lorem ipsum dolor sit amet, at eam blandit sadipscing, vim adhuc sanctus disputando ex, cu usu affert alienum urbanitas.",
+        "css": {
+            "text-align": "center",
+            "margin": "10px 13px 0px 7px"
+        }
+    },
+    "caption": {
+        "enable": true,
+        "html": "Análisis de 35 tweets entre 2015-01-01 y 2018-01-01",
+        "css": {
+            "text-align": "center",
+            "margin": "10px 13px 0px 7px"
+        }
+    }
+}
