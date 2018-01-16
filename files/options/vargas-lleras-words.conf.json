@@ -1,7 +1,7 @@
 {
     "chart": {
         "type": "lineChart",
-        "height": 450,
+        "height": 250,
         "margin": {
             "top": 20,
             "right": 20,
@@ -11,10 +11,10 @@
         "useInteractiveGuideline": true,
         "dispatch": {},
         "xAxis": {
-            "axisLabel": "Frecuencia"
+            "axisLabel": "Fecha"
         },
         "yAxis": {
-            "axisLabel": "Fecha",
+            "axisLabel": "porcentaje",
             "axisLabelDistance": -10
         },
         "color": [
@@ -25,7 +25,8 @@
             "#887ee0",
             "#44a650",
             "#30a2c9"
-        ]
+        ],
+        "duration": 1000
     },
     "title": {
         "enable": false,

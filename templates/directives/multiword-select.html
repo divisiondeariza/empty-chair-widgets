@@ -3,23 +3,23 @@
 		<div uib-alert ng-repeat="alert in alerts" 
 			 class="alert-danger"
 			 close="closeAlert($index)"
-			 dismiss-on-timeout="2000"
+			 dismiss-on-timeout="200000"
 			 ng-bind="alert.msg">	 
 		</div>		
 	</div>
 
 	<div class="row multiword-content">
-		<div class="col-lg-6 category" ng-repeat="category in categories">
+		<div class="category col-sm-6" ng-repeat="category in categories">
 			<fieldset>
 				<legend ng-bind="category"></legend>
-				<div class="row">
-					<div class="col-lg-3" ng-repeat="wordData in words| filter:category:true:category">
+				<div>
+					<span ng-repeat="wordData in words| filter:category:true:category">
 						<a ng-bind="wordData.word"
 						   ng-class="isSelected(wordData)?'selected':''"
 							ng-click="toggleWord(wordData)">
 							
 						</a>
-					</div>
+					</span>
 				</div>
 			</fieldset>			
 		</div>
