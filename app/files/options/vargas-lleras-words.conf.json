@@ -1,7 +1,7 @@
 {
     "chart": {
         "type": "lineChart",
-        "height": 200,
+        "height": 250,
         "margin": {
             "top": 20,
             "right": 20,
@@ -25,7 +25,8 @@
             "#887ee0",
             "#44a650",
             "#30a2c9"
-        ]
+        ],
+        "duration": 1000
     },
     "title": {
         "enable": false,

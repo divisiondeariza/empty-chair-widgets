@@ -8,14 +8,14 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "data", "options",
-    function ($scope, $http, data, options) {
+  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "$window", "data", "options", 
+    function ($scope, $http, $window, data, options) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-
+    console.log($window);
     var dates = data.dates.map(function(strdate){
       return new Date(strdate);
     })
@@ -43,12 +43,20 @@ angular.module('emptyChairWidgetApp')
       $scope.d3data = $scope.selectedWords.map(
 
         function(wordData) {
-           //var element = data.words[wordData.word];
-           console.log(totaldata[wordData.word]);
            return totaldata[wordData.word];
             }
         );
-    })
+      $scope.options.chart.height = $scope.options.chart.height;
+    });
+
+    angular.element($window).on('resize', function () {
+        if($window.innerWidth<576){
+          $scope.options.chart.height =  400;
+        } else{
+          $scope.options.chart.height = 250;
+        };
+    });
+
 
     $scope.options =  options;
     $scope.options.chart.xAxis.tickFormat = function(d) {
