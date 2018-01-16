@@ -1,13 +1,21 @@
 .multiword-select{
-	a{
-		color:#909090;
-		font-size: 16px;
-		text-align: center;
-		cursor: pointer;
-		width: 100%;
+	position: relative;
+	.multiword-select-alert{
 
+		    position: absolute;
+		    width: 100%;
+		    top:0;
+
+  			transform: translateY(-100%);
+
+		    &:after{
+		    	top:0;
+		    	position: absolute;
+
+		    }
+		
 	}
-	
+
     .alert-danger.ng-enter,
     .alert-danger.ng-leave {
       -webkit-transition: 0.5s linear all;
@@ -24,10 +32,18 @@
       opacity: 1;
     }
 
+	a{
+		color:#909090;
+		font-size: 16px;
+		text-align: center;
+		cursor: pointer;
+		width: 100%;
+
+	}
+	
 	a:hover{
-		font-weight: bold;
-		text-decoration: none;
-		letter-spacing: 1px;
+		font-style: oblique;
+		color:white;
 	}
 
 	.selected{
@@ -83,11 +99,23 @@
 
 	}
 
+
 	.multiword-content{ 
 		.category{
-			fieldset{
-				margin-left: 10px;
-				margin-right: 10px;}
+			padding-right: 0;
+			div{
+				text-align: justify;
+			}
+
+			span{
+				display:inline-block;
+
+				&:after{
+					content: '\00a0\2022\00a0\00a0';
+					font-size:11px;
+				}
+
+			}
 			// &:nth-child(odd){
 			&:nth-child(1){
 
@@ -96,8 +124,5 @@
 				border-right-style: solid;
 			}
 		}
-
 	}
-
-
 }

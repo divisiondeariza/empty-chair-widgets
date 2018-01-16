@@ -14,3 +14,9 @@ body{
 svg text {
 	    fill: white;
 }
+
+h1{
+	@media screen and (max-width: 768px) {
+		font-size: calc(12px + 3vw); 		
+	}
+}

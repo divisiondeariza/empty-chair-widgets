@@ -20,29 +20,34 @@ angular.module('emptyChairWidgetApp')
       return new Date(strdate);
     })
 
-    $scope.data = data;
+    var totaldata = {};
+
+    Object.keys(data.words).forEach(function(word){
+      var rawvalues = data.words[word].norm1;
+      totaldata[word] = {values: rawvalues.map(function(value, index){
+                                    return {x: dates[index], 
+                                            y: value};
+                                }),
+                        key:word}
+    });
+    console.log(totaldata);
+    //$scope.data = data;
     $scope.selectedWords = [];
     $scope.words = Object.keys(data.words)
     .map(function(element, index){
       return {word:element, category:data.words[element].tag} ;
     });
-    $scope.d3data = $scope.words.map(function(wordData) {
-         var element = data.words[wordData.word]
-         return {values:element.norm1.map(function(value, index){
-                    return {x:index, y:value};
-                }),
-                 key   :wordData.word}
-                }).slice(1, 2);
+    $scope.d3data = [];
 
     $scope.$watchCollection('selectedWords', function(){
-      $scope.d3data = $scope.selectedWords.map(function(wordData) {
-           var element = data.words[wordData.word]
-           return {values:element.norm1.map(function(value, index){
-                      return {x: dates[index], 
-                              y: value};
-                  }),
-                   key   :wordData.word}
-                  });
+      $scope.d3data = $scope.selectedWords.map(
+
+        function(wordData) {
+           //var element = data.words[wordData.word];
+           console.log(totaldata[wordData.word]);
+           return totaldata[wordData.word];
+            }
+        );
     })
 
     $scope.options =  options;
