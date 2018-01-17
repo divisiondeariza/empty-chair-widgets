@@ -22,10 +22,11 @@ angular.module('emptyChairWidgetApp')
     };
 
     function postLink(scope, element) {
-    	scope.alerts = [];
+    	  scope.alerts = [];
 
       	scope.categories = scope.words.map(getCategory)
-      								  .filter(uniqueFilter)
+      								  .filter(uniqueFilter);
+        scope.isCategorized = (scope.categories.indexOf(undefined) == -1);
 
       	scope.closeAlert = function(index){
       		scope.alerts.splice(index, 1)

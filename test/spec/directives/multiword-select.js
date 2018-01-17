@@ -35,6 +35,22 @@ describe('Directive: multiwordSelect', function () {
 
   });
 
+  describe('set isCategorized correctly',function(){
+    it("should set true when there are categories", function(){
+      expect(element.isolateScope().isCategorized).toBeTruthy();
+    });
+
+    it("should set false when there are categories", inject(function($compile){
+      scope.words = [{word:"alpha"}, 
+                     {word:"alpha8"}, 
+                     {word:"beta"}];
+      element = angular.element('<multiword-select words=words selected-words = sel></multiword-select>');
+      element = $compile(element)(scope);
+      scope.$digest(); 
+      expect(element.isolateScope().isCategorized).toBeFalsy();
+    }));
+
+  });
   describe('toggleWord(word) function',function(){
 
     it('should set word in selected-words', function(){

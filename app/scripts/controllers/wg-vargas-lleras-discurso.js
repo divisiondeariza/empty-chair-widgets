@@ -31,19 +31,22 @@ angular.module('emptyChairWidgetApp')
     Object.keys(data.words).forEach(function(word){
       var rawvalues = data.words[word].norm1;
       totaldata[word] = {values: rawvalues
-                                  //.slice(0,300)
+                                  //.slice(300,400)
                                   .map(function(value, index){
                                     return {x: dates[index], 
                                             y: value};
                                   }),
                         key:word}
     });
+
+    console.log(dates.length);
     $scope.data = data;
     $scope.words = Object.keys(data.words)
     .sort()
     .map(function(element, index){
       return {word:element, 
-              category:translates[data.words[element].tag]} ;
+              //category:translates[data.words[element].tag]
+            } ;
     });
     var scoreSortedWords = $scope.words.map(function(e){return e}).sort(function(a, b){
       return data.words[b.word].score - data.words[a.word].score;
