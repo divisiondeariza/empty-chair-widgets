@@ -15,28 +15,40 @@ angular.module('emptyChairWidgetApp')
       'AngularJS',
       'Karma'
     ];
+
+    var translates = {"X": "X",
+                      "NOUN": "Nombres",
+                      "VERB": "Verbos",
+                      "ADJ": "Adjetivos"}
+
     console.log($window);
     var dates = data.dates.map(function(strdate){
       return new Date(strdate);
-    })
+    }); 
 
     var totaldata = {};
 
     Object.keys(data.words).forEach(function(word){
       var rawvalues = data.words[word].norm1;
-      totaldata[word] = {values: rawvalues.map(function(value, index){
+      totaldata[word] = {values: rawvalues
+                                  //.slice(0,300)
+                                  .map(function(value, index){
                                     return {x: dates[index], 
                                             y: value};
-                                }),
+                                  }),
                         key:word}
     });
-    console.log(totaldata);
-    //$scope.data = data;
-    $scope.selectedWords = [];
+    $scope.data = data;
     $scope.words = Object.keys(data.words)
+    .sort()
     .map(function(element, index){
-      return {word:element, category:data.words[element].tag} ;
+      return {word:element, 
+              category:translates[data.words[element].tag]} ;
     });
+    var scoreSortedWords = $scope.words.map(function(e){return e}).sort(function(a, b){
+      return data.words[b.word].score - data.words[a.word].score;
+    });
+    $scope.selectedWords = scoreSortedWords.slice(0,3);
     $scope.d3data = [];
 
     $scope.$watchCollection('selectedWords', function(){
@@ -65,5 +77,21 @@ angular.module('emptyChairWidgetApp')
     $scope.options.chart.yAxis.tickFormat = function(d) {
                         return Math.round(d * 100)/100;
                     };
-                  
+
+
+    $scope.options.chart.lines = {
+                                   dispatch : {
+                                    elementClick: function(e){ 
+                                      var index = e[0].pointIndex;
+                                      var top3 = $scope.words
+                                                  .map(function(e){return e})
+                                                  .sort(function(a, b){
+                                                      return data.words[b.word].norm1[index] - data.words[a.word].norm1[index];
+                                                    })
+                                                  .slice(0,3);
+                                      $scope.selectedWords = top3;
+                                      $scope.$digest();
+                                      }
+                                    }
+                                  };
   }]);

@@ -12,7 +12,7 @@
                class="panel-default"
                is-open="status.open"  >
           <uib-accordion-heading>
-              I can have markup, too! 
+              seleccione los términos aquí 
               <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
           </uib-accordion-heading>
           <multiword-select words=words
@@ -24,7 +24,7 @@
         </uib-accordion>      
       </div>
 
-        <!-- <pre>{{options | json : 4}}</pre> -->
+        <!-- <pre>{{words2| json : 4}}</pre> -->
         <nvd3 options="options" data="d3data"></nvd3>
         <multiword-select words=words
         selected-words = selectedWords
