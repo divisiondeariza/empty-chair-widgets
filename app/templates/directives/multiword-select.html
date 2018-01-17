@@ -3,8 +3,8 @@
 		<div uib-alert ng-repeat="alert in alerts" 
 			 class="alert-danger"
 			 close="closeAlert($index)"
-			 dismiss-on-timeout="200000"
-			 ng-bind="alert.msg">	 
+			 dismiss-on-timeout="5000">
+			 <span ng-bind="alert.msg"></span>	 
 		</div>		
 	</div>
 
