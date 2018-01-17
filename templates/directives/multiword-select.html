@@ -9,7 +9,9 @@
 	</div>
 
 	<div class="row multiword-content">
-		<div class="category col-sm-6" ng-repeat="category in categories">
+		<div class= "category" 
+			 ng-class= "isCategorized?'col-sm-6':''" 
+			 ng-repeat="category in categories">
 			<fieldset>
 				<legend ng-bind="category"></legend>
 				<div>
