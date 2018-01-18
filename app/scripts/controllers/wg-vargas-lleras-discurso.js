@@ -54,13 +54,13 @@ angular.module('emptyChairWidgetApp')
       $scope.options.chart.height = $scope.options.chart.height;
     });
 
-    angular.element($window).on('resize', function () {
+/*    angular.element($window).on('resize', function () {
         if($window.innerWidth<576){
           $scope.options.chart.height =  400;
         } else{
           $scope.options.chart.height = 250;
         };
-    });
+    });*/
 
 
     $scope.options =  options;
