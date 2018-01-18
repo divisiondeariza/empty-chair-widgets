@@ -2,27 +2,27 @@
   <div class="container-fluid widget-container">
     <h1>¿Cómo se ha transformado el discurso de Vargas Lleras?</h1>
     <p>
-      Seleccione hasta 7 términos y estudie su evolución en el tiempo...
+      Seleccione hasta 5 términos y estudie su evolución en el tiempo.
     </p>
-
-    <div class="row">
-      <div class="visible-sm visible-xs">
-        <uib-accordion>
-          <div uib-accordion-group
-               class="panel-default"
-               is-open="status.open"  >
-          <uib-accordion-heading>
-              seleccione los términos aquí 
-              <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-          </uib-accordion-heading>
-          <multiword-select words=words
-                            selected-words = selectedWords
-                            select-limit = 7
-                            limit-reached-msg="Solo puede seleccionar hasta siete palabras a la vez">
-          </multiword-select>
-          </div>
-        </uib-accordion>      
+    <div class="visible-sm visible-xs">
+      <uib-accordion>
+        <div uib-accordion-group
+             class="panel-default"
+             is-open="status.open"  >
+        <uib-accordion-heading>
+            seleccione los términos aquí 
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        </uib-accordion-heading>
+        <multiword-select words=words
+                          selected-words = selectedWords
+                          select-limit = 5
+                          limit-reached-msg="Solo puede seleccionar hasta cinco palabras a la vez">
+        </multiword-select>
+        </div>
+      </uib-accordion>      
       </div>
+    <div class="row">
+
 
         <!-- <pre>{{words2| json : 4}}</pre> -->
         <nvd3 options="options" data="d3data"></nvd3>
@@ -33,5 +33,6 @@
         class="hidden-sm hidden-xs">
 
         </multiword-select>
+     </div>
     </div>
   </div>
