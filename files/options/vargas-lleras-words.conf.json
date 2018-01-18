@@ -3,7 +3,7 @@
         "type": "lineChart",
         "height": 250,
         "margin": {
-            "top": 20,
+            "top": 30,
             "right": 20,
             "bottom": 40,
             "left": 55
@@ -14,7 +14,7 @@
             "axisLabel": "Fecha"
         },
         "yAxis": {
-            "axisLabel": "porcentaje",
+            "axisLabel": "Frecuencia de uso",
             "axisLabelDistance": -10
         },
         "color": [
@@ -42,7 +42,7 @@
     },
     "caption": {
         "enable": true,
-        "html": "Análisis de 3528 entre Diciembre de 2015 y Enero de 2019",
+        "html": "Análisis de 3528 tweets entre Enero de 2016 y Enero de 2018",
         "css": {
             "text-align": "center",
             "margin": "10px 13px 0px 7px"
