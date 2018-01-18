@@ -52,6 +52,13 @@ h1{
 	}
 }
 
+
+.nvtooltip{
+	@media screen and (max-width: 576px) {
+		visibility: hidden;		
+	}
+}
+
 .panel-default{
 	background-color: transparent;
 	border:0;
