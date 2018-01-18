@@ -8,23 +8,15 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "$window", "data", "options", 
-    function ($scope, $http, $window, data, options) {
+  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "$window", "timeSeriesParser" ,"data", "options", 
+    function ($scope, $http, $window, timeSeriesParser, data, options) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    var translates = {"X": "X",
-                      "NOUN": "Nombres",
-                      "VERB": "Verbos",
-                      "ADJ": "Adjetivos"}
-
-    console.log($window);
-    var dates = data.dates.map(function(strdate){
-      return new Date(strdate);
-    }); 
+    var dates = timeSeriesParser.getDates(data, "dates");
 
     var totaldata = {};
 
@@ -39,14 +31,12 @@ angular.module('emptyChairWidgetApp')
                         key:word}
     });
 
-    console.log(dates.length);
     $scope.data = data;
+
     $scope.words = Object.keys(data.words)
     .sort()
     .map(function(element, index){
-      return {word:element, 
-              //category:translates[data.words[element].tag]
-            } ;
+      return {word:element} ;
     });
     var scoreSortedWords = $scope.words.map(function(e){return e}).sort(function(a, b){
       return data.words[b.word].score - data.words[a.word].score;
