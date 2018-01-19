@@ -16,22 +16,12 @@ angular.module('emptyChairWidgetApp')
       'Karma'
     ];
 
-    var dates = timeSeriesParser.getDates(data, "dates");
-
     var totaldata = {};
 
     Object.keys(data.words).forEach(function(word){
-      var rawvalues = data.words[word].norm1;
-      totaldata[word] = {values: rawvalues
-                                  //.slice(300,400)
-                                  .map(function(value, index){
-                                    return {x: dates[index], 
-                                            y: value};
-                                  }),
+      totaldata[word] = {values: timeSeriesParser.getDateValueTuples(data, "dates", "words", word, "norm1"),
                         key:word}
     });
-
-    $scope.data = data;
 
     $scope.words = Object.keys(data.words)
     .sort()
@@ -51,21 +41,18 @@ angular.module('emptyChairWidgetApp')
            return totaldata[wordData.word];
             }
         );
-      $scope.options.chart.height = $scope.options.chart.height;
     });
-
-/*    angular.element($window).on('resize', function () {
-        if($window.innerWidth<576){
-          $scope.options.chart.height =  400;
-        } else{
-          $scope.options.chart.height = 250;
-        };
-    });*/
 
 
     $scope.options =  options;
+    $scope.options.chart.xAxis.tickValues = Object.keys(data.marks)
+                                              .map(function(d){
+                                                var date = new Date(d);
+                                                date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
+                                                return new Date(date);
+                                              })
     $scope.options.chart.xAxis.tickFormat = function(d) {
-                        return d3.time.format('%Y-%m-%d')(new Date(d))
+                        return data.marks[d3.time.format('%Y-%m-%d')(new Date(d))];
                     };    
     $scope.options.chart.yAxis.tickFormat = function(d) {
                         return Math.round(d * 100)/100;

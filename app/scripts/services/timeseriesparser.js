@@ -6,10 +6,8 @@
  * @description
  * # timeSeriesParser for time series in the form:
  * {dates: [...],
- *  sets: {
- *	        ...
- *			set_n: {
- *				...	
+ *  sets: {...
+ *			set_n: {...	
  *				serie_n: [...]
  *					}
  *			}
@@ -18,6 +16,13 @@
  */
 angular.module('emptyChairWidgetApp')
   .service('timeSeriesParser', function () {
+    this.getNamesSortedByKey = function(timeSeries, setsName, keyName, isAscendant){
+      return this.getNames(timeSeries, setsName)
+                 .sort(function(a,b){
+                    return (timeSeries[setsName][a][keyName] - timeSeries[setsName][b][keyName])*(isAscendant?1:-1);
+                 });
+    }
+
   	this.getDateValueTuples  = function(timeSeries, datesName, setsName, singleSetName, serieName){
   		var rawvalues = timeSeries[setsName][singleSetName][serieName];
   		var dates = this.getDates(timeSeries, datesName);
@@ -37,5 +42,4 @@ angular.module('emptyChairWidgetApp')
   		return Object.keys(timeSeries[setsName]);
   	};
 
-    // AngularJS will instantiate a singleton by calling "new" on this function
   });
