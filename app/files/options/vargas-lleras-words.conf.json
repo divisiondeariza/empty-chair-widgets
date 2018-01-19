@@ -14,7 +14,7 @@
             "axisLabel": "Fecha"
         },
         "yAxis": {
-            "axisLabel": "Frecuencia de uso",
+            "axisLabel": "frencuencia de uso semanal",
             "axisLabelDistance": -10
         },
         "color": [

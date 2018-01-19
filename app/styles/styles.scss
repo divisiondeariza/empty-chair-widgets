@@ -32,8 +32,24 @@ body{
 	font-family: 'Josefin sans', sans-serif;
 	width: 100%;
 	text-align: center;
-	img{
-		//background-color: white;
+
+	@media screen and (max-width:  576px) {
+		//background-color: blue;	
+		font-size: 4vw;
+		.social-logo{
+			img{
+				width: 4vw;	
+				height: auto;
+			}
+
+		}
+		.wj-logo{
+			img{
+				width: 35vw;	
+				height: auto;
+			}
+
+		}
 	}
 }
 
