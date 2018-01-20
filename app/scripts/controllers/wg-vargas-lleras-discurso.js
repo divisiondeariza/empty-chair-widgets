@@ -8,20 +8,15 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "$window", "timeSeriesParser" ,"data", "options", 
-    function ($scope, $http, $window, timeSeriesParser, data, options) {
+  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "$window", "wordsVizDataProcessor" ,"data", "options", 
+    function ($scope, $http, $window, wordsVizDataProcessor, data, options) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    var totaldata = {};
-
-    Object.keys(data.words).forEach(function(word){
-      totaldata[word] = {values: timeSeriesParser.getDateValueTuples(data, "dates", "words", word, "norm1"),
-                        key:word}
-    });
+    var totaldata = wordsVizDataProcessor.remap(data, "norm1");
 
     $scope.words = Object.keys(data.words)
     .sort()
@@ -45,14 +40,15 @@ angular.module('emptyChairWidgetApp')
 
 
     $scope.options =  options;
-    $scope.options.chart.xAxis.tickValues = Object.keys(data.marks)
+/*    $scope.options.chart.xAxis.tickValues = Object.keys(data.marks)
                                               .map(function(d){
                                                 var date = new Date(d);
                                                 date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
                                                 return new Date(date);
-                                              })
+                                              })*/
     $scope.options.chart.xAxis.tickFormat = function(d) {
-                        return data.marks[d3.time.format('%Y-%m-%d')(new Date(d))];
+                        //return data.marks[d3.time.format('%Y-%m-%d')(new Date(d))];
+                        return d3.time.format('%Y-%m-%d')(new Date(d));
                     };    
     $scope.options.chart.yAxis.tickFormat = function(d) {
                         return Math.round(d * 100)/100;
