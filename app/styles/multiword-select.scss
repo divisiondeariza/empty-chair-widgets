@@ -35,10 +35,18 @@
 
 	}
 	
-	a:hover{
-		font-style: oblique;
-		color:white;
+	@media(hover: hover) {
+		a:hover{
+			font-style: oblique;
+			color:white;
+		}
 	}
+
+	@media(hover: none) {
+		a:hover{
+			text-decoration: none;
+		}
+	}	
 
 	.selected{
 		color: white;
