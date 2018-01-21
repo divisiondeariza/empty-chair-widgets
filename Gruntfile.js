@@ -261,7 +261,7 @@ module.exports = function (grunt) {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',  #This is temporal while I fix the problem with templates
           '!<%= yeoman.dist %>/images/action_buttons{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/styles/fonts/*'
         ]
@@ -465,8 +465,18 @@ module.exports = function (grunt) {
       options: {
         base: 'dist'
       },
-      src: ['**']
-      }
+      src: ['**'],
+      // subtask
+      'testing':{
+          options: {
+            repo: 'git@github.com:divisiondeariza/empty-chair-widgets-testing.git',
+            branch: 'master',
+          },
+          src: ['**'],
+       }
+      },
+
+
 
   });
 
@@ -521,6 +531,11 @@ module.exports = function (grunt) {
   grunt.registerTask('deploy-gh', [
     'build',
     'gh-pages'
+  ]);
+  
+  grunt.registerTask('test-gh', [
+    'build',
+    'gh-pages:testing'
   ]);
 
   grunt.registerTask('default', [
