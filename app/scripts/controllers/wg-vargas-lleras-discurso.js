@@ -16,18 +16,19 @@ angular.module('emptyChairWidgetApp')
       'Karma'
     ];
 
-    var totaldata = wordsVizDataProcessor.remap(data, "norm1");
+    function mapForMultiwordSelect(element){
+      return {word:element};
+    }
 
-    $scope.words = Object.keys(data.words)
-    .sort()
-    .map(function(element, index){
-      return {word:element} ;
-    });
-    var scoreSortedWords = $scope.words.map(function(e){return e}).sort(function(a, b){
-      return data.words[b.word].score - data.words[a.word].score;
-    });
-    $scope.selectedWords = scoreSortedWords.slice(0,3);
+    var totaldata = wordsVizDataProcessor.remap(data, "norm1");
     $scope.d3data = [];
+    $scope.selectedWords = wordsVizDataProcessor.getSortedWords(data, "score", false, 3)
+                                                .map(mapForMultiwordSelect);
+
+    $scope.words = wordsVizDataProcessor.getSortedWords(data, "lemma")
+                                        .map(mapForMultiwordSelect);
+
+    
 
     $scope.$watchCollection('selectedWords', function(){
       $scope.d3data = $scope.selectedWords.map(
@@ -47,25 +48,16 @@ angular.module('emptyChairWidgetApp')
                                                 return new Date(date);
                                               })*/
     $scope.options.chart.xAxis.tickFormat = function(d) {
-                        //return data.marks[d3.time.format('%Y-%m-%d')(new Date(d))];
                         return d3.time.format('%Y-%m-%d')(new Date(d));
                     };    
-    $scope.options.chart.yAxis.tickFormat = function(d) {
-                        return Math.round(d * 100)/100;
-                    };
-
 
     $scope.options.chart.lines = {
                                    dispatch : {
                                     elementClick: function(e){ 
                                       var index = e[0].pointIndex;
-                                      var top3 = $scope.words
-                                                  .map(function(e){return e})
-                                                  .sort(function(a, b){
-                                                      return data.words[b.word].norm1[index] - data.words[a.word].norm1[index];
-                                                    })
-                                                  .slice(0,3);
-                                      $scope.selectedWords = top3;
+                                      $scope.selectedWords = wordsVizDataProcessor
+                                                                  .getSortedWordsBySerie(data, "norm1", index, false, 3)
+                                                                  .map(mapForMultiwordSelect);;
                                       $scope.$digest();
                                       }
                                     }
