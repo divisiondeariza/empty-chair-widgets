@@ -103,7 +103,51 @@ describe('Service: wordsVizDataProcessor', function () {
 
   });
 
+  describe('reindexing marks', function(){
+    beforeEach(function(){
+      datamock = {
+        dates: ["2015-06-03", "2015-06-13"],
+        words: {
+          set1:{
+            serie1: [0,1],
+            serie2: [0,0.1],
+            score: 10
+          },
+          set3:{
+            serie1: [3, 4],
+            serie2: [0.3,0.4],
+            score: 100
+          },
+          set2:{
+            serie1: [8,7],
+            serie2: [0.8,0.7],
+            score: 30
+          },
+          set4:{
+            serie1: [8,8],
+            serie2: [0.7,0.7],
+            score: 1
+          }
+        },
+        marks: {
+          "2015-06-05":"fact 1",
+          "2015-06-14":"fact 2"
+        }
 
+      }
+    });
+
+    it('should reindex marks to the nearest date in dates', function(){
+      var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
+      var date1 = new Date("2015-06-03");
+      var date2 = new Date("2015-06-13");
+      expect(reindexedMarks).toEqual({
+          "2015-06-03": "fact 1",
+          "2015-06-13": "fact 2"
+        }) 
+    })
+
+  })
 
 
 });

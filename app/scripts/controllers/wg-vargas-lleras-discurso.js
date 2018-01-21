@@ -21,12 +21,15 @@ angular.module('emptyChairWidgetApp')
     }
 
     var totaldata = wordsVizDataProcessor.remap(data, "norm1");
+    var marks = wordsVizDataProcessor.reindexMarks(data);
+    console.log(marks);
     $scope.d3data = [];
     $scope.selectedWords = wordsVizDataProcessor.getSortedWords(data, "score", false, 3)
                                                 .map(mapForMultiwordSelect);
 
     $scope.words = wordsVizDataProcessor.getSortedWords(data, "lemma")
                                         .map(mapForMultiwordSelect);
+
 
     
 
@@ -48,8 +51,35 @@ angular.module('emptyChairWidgetApp')
                                                 return new Date(date);
                                               })*/
     $scope.options.chart.xAxis.tickFormat = function(d) {
+                        console.log(d);
+                        console.log(new Date(d));
                         return d3.time.format('%Y-%m-%d')(new Date(d));
-                    };    
+                    };
+    $scope.options.chart.interactiveLayer = { 
+      "tooltip": {
+
+      headerFormatter: function (d, i) {
+                          var date = new Date(d);
+                          date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
+                          var formatedDate = $scope.options.chart.xAxis.tickFormat(date);
+                          var mark = "";
+                          if(marks[formatedDate])
+                            mark = "<p>" + marks[formatedDate] + "</p>"
+                          return formatedDate + mark;
+                      }
+      },
+
+    }
+
+
+
+
+/*     tooltip = {
+      headerFormater: function (d, i) {
+                          return xAxis.tickFormat()(d, i) + "Y lo k";
+                            return "living on video";
+                      }
+    }     */
 
     $scope.options.chart.lines = {
                                    dispatch : {

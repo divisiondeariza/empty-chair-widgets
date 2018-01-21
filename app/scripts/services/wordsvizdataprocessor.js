@@ -27,6 +27,37 @@
     	return getSortedWordsBase(compareFunction, data, end);
     };
 
+    this.reindexMarks = function(data){
+    	var dates =  getDates(data);
+    	console.log(dates);
+    	var reindexed  = {};
+
+    	Object.keys(data.marks)
+    				 .forEach(function(strdate){
+    				 	var index = getClosestIndex((new Date(strdate)), dates);
+    				 	reindexed[data.dates[index]] = data.marks[strdate];
+
+    				 });
+    	return reindexed;
+
+    }
+
+    // Could be done faster
+    function getClosestIndex(num, arr){
+        var curr = arr[0];
+        var index = 0;
+        var diff = Math.abs (num - curr);
+        for (var val = 0; val < arr.length; val++) {
+            var newdiff = Math.abs (num - arr[val]);
+            if (newdiff < diff) {
+                diff = newdiff;
+                curr = arr[val];
+                index = val;
+            }
+        }
+        return index;    	
+    }
+
     function getSortedWordsBase(compareFunction, data, end){
 		var wordsList = Object.keys(data.words)
 						.sort(compareFunction);
