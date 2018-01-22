@@ -9,42 +9,44 @@
  */
 angular.module('emptyChairWidgetApp')
   .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "wordsVizDataProcessor" ,"data", "options", 
-    function ($scope, wordsVizDataProcessor, data, options) {
+    function ($scope, w, data, options) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    function mapForMultiwordSelect(element){
-      return {word:element};
-    }
-
-    var totaldata = wordsVizDataProcessor.remap(data, "norm1");
-    var marks = wordsVizDataProcessor.reindexMarks(data);
-    $scope.d3data = [];
-    $scope.selectedWords = wordsVizDataProcessor.getSortedWords(data, "score", false, 3)
-                                                .map(mapForMultiwordSelect);
-
-    $scope.words = wordsVizDataProcessor.getSortedWords(data, "lemma")
-                                        .map(mapForMultiwordSelect);
-
-
-    
-
-    $scope.$watchCollection('selectedWords', function(){
-      var words = $scope.selectedWords.map(function(e){return e.word})
-      $scope.d3data = wordsVizDataProcessor.getFromRemapped(totaldata, words);
+//            Global
+    $scope.selectedWords = w.getSortedWords(data, "score", false, 3)
+    $scope.$watchCollection('selectedWordTuples', function(){
+      $scope.selectedWords  = $scope.selectedWordTuples.map(function(e){return e.word})
     });
 
 
+//            ControlBox
+    function mapForMultiwordSelect(element){
+      return {word:element};
+    }
+    $scope.wordTuples = w.getSortedWords(data, "lemma")
+                                        .map(mapForMultiwordSelect);
+    $scope.selectedWordTuples = $scope.selectedWords.map(mapForMultiwordSelect);
+
+
+
+//             WordsViz
+    var totaldata = w.remap(data, "norm1");
+    var marks = w.reindexMarks(data);
+    $scope.d3data = [];
+    $scope.$watchCollection('selectedWords', function(){
+      $scope.d3data = w.getFromRemapped(totaldata, $scope.selectedWords);
+    });
     $scope.options =  options;
-    $scope.options.chart.xAxis.tickFormat = wordsVizDataProcessor.formatDate;
+    $scope.options.chart.xAxis.tickFormat = w.formatDate;
     $scope.options
           .chart
           .interactiveLayer = { 
                   tooltip: {
-                    headerFormatter: wordsVizDataProcessor.formatDateWithMarks.bind(wordsVizDataProcessor, marks),
+                    headerFormatter: w.formatDateWithMarks.bind(w, marks),
                   },
     }
 
@@ -52,9 +54,7 @@ angular.module('emptyChairWidgetApp')
                                    dispatch : {
                                     elementClick: function(e){ 
                                       var index = e[0].pointIndex;
-                                      $scope.selectedWords = wordsVizDataProcessor
-                                                                  .getSortedWordsBySerie(data, "norm1", index, false, 3)
-                                                                  .map(mapForMultiwordSelect);;
+                                      $scope.selectedWords = w.getSortedWordsBySerie(data, "norm1", index, false, 3)
                                       $scope.$digest();
                                       }
                                     }
