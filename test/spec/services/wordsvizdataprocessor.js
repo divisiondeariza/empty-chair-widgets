@@ -103,32 +103,22 @@ describe('Service: wordsVizDataProcessor', function () {
 
   });
 
-  describe('reindexing marks', function(){
+  describe('formatDate', function(){
+    it("should format date correcly", function(){
+        var date = new Date("2015-06-03");
+        var formattedDate =  wordsVizDataProcessor.formatDate(date);      
+        expect(formattedDate).toEqual("2015-06-03");
+    })
+  });
+
+  describe('marks', function(){
     beforeEach(function(){
       datamock = {
-        dates: ["2015-06-03", "2015-06-13"],
-        words: {
-          set1:{
-            serie1: [0,1],
-            serie2: [0,0.1],
-            score: 10
-          },
-          set3:{
-            serie1: [3, 4],
-            serie2: [0.3,0.4],
-            score: 100
-          },
-          set2:{
-            serie1: [8,7],
-            serie2: [0.8,0.7],
-            score: 30
-          },
-          set4:{
-            serie1: [8,8],
-            serie2: [0.7,0.7],
-            score: 1
-          }
-        },
+        dates: ["2015-06-03", 
+                "2015-06-10",
+                "2015-06-17",
+                "2015-06-24",],
+        words: {},
         marks: {
           "2015-06-05":"fact 1",
           "2015-06-14":"fact 2"
@@ -136,18 +126,65 @@ describe('Service: wordsVizDataProcessor', function () {
 
       }
     });
-
-    it('should reindex marks to the nearest date in dates', function(){
-      var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
-      var date1 = new Date("2015-06-03");
-      var date2 = new Date("2015-06-13");
-      expect(reindexedMarks).toEqual({
+    describe("reindexing marks", function(){
+      it('should reindex marks to the nearest date in dates', function(){
+        var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
+        expect(reindexedMarks).toEqual({
           "2015-06-03": "fact 1",
-          "2015-06-13": "fact 2"
+          "2015-06-17": "fact 2"
         }) 
+      });
+
+      it('should reindex correcly in limit cases', function(){
+        datamock.marks = {
+          "2015-05-01":"fact 1",
+          "2015-08-30":"fact 2"
+        };
+        var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
+        expect(reindexedMarks).toEqual({
+          "2015-06-03": "fact 1",
+          "2015-06-24": "fact 2"
+        }) 
+      });
+
+      it('should concat facts when correspond to same reindexed date', function(){
+        datamock.marks = {
+          "2015-06-09":"fact 1",
+          "2015-06-11":"fact 2"
+        };
+        var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
+        expect(reindexedMarks).toEqual({
+          "2015-06-10": "fact 1, fact 2",
+        }) 
+      });
+    });
+
+    describe("Format data with marks", function(){
+      it('Should format data normally if any mark correspond to that date', function(){
+        var marks = {
+          "2015-06-09":"fact 1",
+          "2015-06-11":"fact 2"
+        };
+        var date = new Date("2015-06-03");
+        var formattedDate =  wordsVizDataProcessor.formatDateWithMarks(marks, date);
+        expect(formattedDate).toEqual("2015-06-03");
+
+      });      
+
+      it('Should format data normally if any mark correspond to that date', function(){
+        var marks = {
+          "2015-06-03":"fact 1",
+          "2015-06-11":"fact 2"
+        };
+        var date = new Date("2015-06-03");
+        var formattedDate =  wordsVizDataProcessor.formatDateWithMarks(marks, date);
+        expect(formattedDate).toEqual("2015-06-03<p>fact 1</p>");
+
+      });      
     })
 
-  })
+
+  });
 
 
 });

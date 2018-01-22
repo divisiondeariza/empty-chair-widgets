@@ -13,8 +13,8 @@
     this.remap = function(data,serieName){
     	var totaldata = {};
     	Object.keys(data.words)
-    		  .forEach(populateRemapedObject, {totaldata:totaldata, serieName:serieName, data:data});
-    	return totaldata
+        .forEach(populateRemapedObject, {totaldata:totaldata, serieName:serieName, data:data});
+        return totaldata
     };
 
     this.getSortedWords = function(data, propertyName, isAscending, end){
@@ -29,17 +29,21 @@
 
     this.reindexMarks = function(data){
     	var dates =  getDates(data);
-    	console.log(dates);
-    	var reindexed  = {};
+    	var marks  = {};
+    	Object.keys(data.marks).forEach(updateMarks.bind(null, data, dates, marks));
+    	return marks;
+    };
 
-    	Object.keys(data.marks)
-    				 .forEach(function(strdate){
-    				 	var index = getClosestIndex((new Date(strdate)), dates);
-    				 	reindexed[data.dates[index]] = data.marks[strdate];
+    this.formatDateWithMarks = function(marks, d){
+        var formatedDate = this.formatDate(d);
+        var mark = marks[formatedDate]? "<p>" + marks[formatedDate] + "</p>":"";
+        return formatedDate + mark;
+    };
 
-    				 });
-    	return reindexed;
-
+    this.formatDate =function(d){
+        var date = new Date(d);
+        date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
+        return d3.time.format('%Y-%m-%d')(new Date(date));
     }
 
     // Could be done faster
@@ -56,46 +60,52 @@
             }
         }
         return index;    	
+    };
+
+    function updateMarks(data, dates, marks, strdate){
+        var index = getClosestIndex((new Date(strdate)), dates);
+        var prependableStr = marks[data.dates[index]]?marks[data.dates[index]] + ", ":"";
+        marks[data.dates[index]] = prependableStr + data.marks[strdate]
     }
 
     function getSortedWordsBase(compareFunction, data, end){
-		var wordsList = Object.keys(data.words)
-						.sort(compareFunction);
-	    if(end)
-	    	return wordsList.slice(0,end);
-	    return wordsList;
-    }
+      var wordsList = Object.keys(data.words)
+      .sort(compareFunction);
+      if(end)
+          return wordsList.slice(0,end);
+      return wordsList;
+  }
 
-    function compareByProperty(data, propertyName, isAscending, a, b){
-    	var sign = isAscending?1:-1;
-		return (data.words[a][propertyName] - data.words[b][propertyName]) * sign;
-    }
+  function compareByProperty(data, propertyName, isAscending, a, b){
+   var sign = isAscending?1:-1;
+   return (data.words[a][propertyName] - data.words[b][propertyName]) * sign;
+}
 
-    function compareBySerie(data, serieName, index, isAscending, a, b){
-    	var sign = isAscending?1:-1;
-    	return (data.words[a][serieName][index] - data.words[b][serieName][index]) * sign;
-    }
+function compareBySerie(data, serieName, index, isAscending, a, b){
+   var sign = isAscending?1:-1;
+   return (data.words[a][serieName][index] - data.words[b][serieName][index]) * sign;
+}
 
-    function populateRemapedObject(word){
-		var rawvalues = this.data.words[word][this.serieName];
-		var dates =  getDates(this.data);
-		this.totaldata[word] = remapForSingleWord(dates, rawvalues, word)   	
-    }
+function populateRemapedObject(word){
+  var rawvalues = this.data.words[word][this.serieName];
+  var dates =  getDates(this.data);
+  this.totaldata[word] = remapForSingleWord(dates, rawvalues, word)   	
+}
 
-    function remapForSingleWord(xvalues, yvalues, key){
-    	return  {values: yvalues.map(remapSingleDatumToXY, {xvalues:xvalues}),
-    	key: key}
-    }
+function remapForSingleWord(xvalues, yvalues, key){
+   return  {values: yvalues.map(remapSingleDatumToXY, {xvalues:xvalues}),
+   key: key}
+}
 
-    function remapSingleDatumToXY(yvalue, index){
-    	return {x: this.xvalues[index], y: yvalue};   	
-    }
+function remapSingleDatumToXY(yvalue, index){
+   return {x: this.xvalues[index], y: yvalue};   	
+}
 
-    function getDates(data){
-    	return data.dates.map(parseStrToDate); 
-    }
+function getDates(data){
+   return data.dates.map(parseStrToDate); 
+}
 
-    function parseStrToDate(strdate){
-    	return new Date(strdate);
-    }
+function parseStrToDate(strdate){
+   return new Date(strdate);
+}
 });

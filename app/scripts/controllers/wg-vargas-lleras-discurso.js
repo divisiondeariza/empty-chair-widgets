@@ -22,7 +22,6 @@ angular.module('emptyChairWidgetApp')
 
     var totaldata = wordsVizDataProcessor.remap(data, "norm1");
     var marks = wordsVizDataProcessor.reindexMarks(data);
-    console.log(marks);
     $scope.d3data = [];
     $scope.selectedWords = wordsVizDataProcessor.getSortedWords(data, "score", false, 3)
                                                 .map(mapForMultiwordSelect);
@@ -44,21 +43,13 @@ angular.module('emptyChairWidgetApp')
 
 
     $scope.options =  options;
-/*    $scope.options.chart.xAxis.tickValues = Object.keys(data.marks)
-                                              .map(function(d){
-                                                var date = new Date(d);
-                                                date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
-                                                return new Date(date);
-                                              })*/
     $scope.options.chart.xAxis.tickFormat = function(d) {
-                        console.log(d);
-                        console.log(new Date(d));
                         return d3.time.format('%Y-%m-%d')(new Date(d));
                     };
     $scope.options.chart.interactiveLayer = { 
       "tooltip": {
 
-      headerFormatter: function (d, i) {
+      headerFormatter: function (d) {
                           var date = new Date(d);
                           date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
                           var formatedDate = $scope.options.chart.xAxis.tickFormat(date);
@@ -71,15 +62,6 @@ angular.module('emptyChairWidgetApp')
 
     }
 
-
-
-
-/*     tooltip = {
-      headerFormater: function (d, i) {
-                          return xAxis.tickFormat()(d, i) + "Y lo k";
-                            return "living on video";
-                      }
-    }     */
 
     $scope.options.chart.lines = {
                                    dispatch : {
