@@ -37,6 +37,29 @@ describe('Service: wordsVizDataProcessor', function () {
     });
   });
 
+  describe('getting sets from remapped using their names', function(){
+    it('should remap AllData given a serie', function(){
+      var remappedData = {set1: {
+                                values:[{y:0, x:(new Date("2015-06-03"))}],
+                                key: "set1"},
+                          set2: {
+                                values:[{y:2, x:(new Date("2015-06-03"))}],
+                                        key: "set2"},
+                          set3: {
+                                values:[{y:3, x:(new Date("2015-06-03"))}],
+                                        key: "set3"}
+                            };
+      var expectedDataFromRemaped = [{values:[{y:0, x:(new Date("2015-06-03"))}],
+                                        key: "set1"
+                                      },
+                                      {values:[{y:3, x:(new Date("2015-06-03"))}],
+                                        key: "set3"
+                                      }]
+      var dataFromRemapped = wordsVizDataProcessor.getFromRemapped(remappedData, ["set1", "set3"]);
+      expect(dataFromRemapped).toEqual(expectedDataFromRemaped);
+    });
+  });
+
   describe('sorting', function(){
     beforeEach(function(){
       datamock = {

@@ -44,6 +44,14 @@
         var date = new Date(d);
         date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
         return d3.time.format('%Y-%m-%d')(new Date(date));
+    };
+
+    this.getFromRemapped = function(remapedData, wordsList){
+        return wordsList.map(getElementFromRemapped.bind(null, remapedData));
+    };
+
+    function getElementFromRemapped(remapedData, word){
+        return remapedData[word];
     }
 
     // Could be done faster
