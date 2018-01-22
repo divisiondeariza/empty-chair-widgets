@@ -8,8 +8,8 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "$http", "$window", "wordsVizDataProcessor" ,"data", "options", 
-    function ($scope, $http, $window, wordsVizDataProcessor, data, options) {
+  .controller('WgVargasLlerasDiscursoCtrl', ["$scope", "wordsVizDataProcessor" ,"data", "options", 
+    function ($scope, wordsVizDataProcessor, data, options) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -33,25 +33,20 @@ angular.module('emptyChairWidgetApp')
     
 
     $scope.$watchCollection('selectedWords', function(){
-      $scope.d3data = $scope.selectedWords.map(
-
-        function(wordData) {
-           return totaldata[wordData.word];
-            }
-        );
+      var words = $scope.selectedWords.map(function(e){return e.word})
+      $scope.d3data = wordsVizDataProcessor.getFromRemapped(totaldata, words);
     });
 
 
     $scope.options =  options;
     $scope.options.chart.xAxis.tickFormat = wordsVizDataProcessor.formatDate;
-    $scope.options.chart.interactiveLayer = { 
-      "tooltip": {
-
-      headerFormatter: wordsVizDataProcessor.formatDateWithMarks.bind(wordsVizDataProcessor, marks),
-      },
-
+    $scope.options
+          .chart
+          .interactiveLayer = { 
+                  tooltip: {
+                    headerFormatter: wordsVizDataProcessor.formatDateWithMarks.bind(wordsVizDataProcessor, marks),
+                  },
     }
-
 
     $scope.options.chart.lines = {
                                    dispatch : {
