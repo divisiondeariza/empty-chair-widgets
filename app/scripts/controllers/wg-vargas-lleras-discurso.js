@@ -43,21 +43,11 @@ angular.module('emptyChairWidgetApp')
 
 
     $scope.options =  options;
-    $scope.options.chart.xAxis.tickFormat = function(d) {
-                        return d3.time.format('%Y-%m-%d')(new Date(d));
-                    };
+    $scope.options.chart.xAxis.tickFormat = wordsVizDataProcessor.formatDate;
     $scope.options.chart.interactiveLayer = { 
       "tooltip": {
 
-      headerFormatter: function (d) {
-                          var date = new Date(d);
-                          date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
-                          var formatedDate = $scope.options.chart.xAxis.tickFormat(date);
-                          var mark = "";
-                          if(marks[formatedDate])
-                            mark = "<p>" + marks[formatedDate] + "</p>"
-                          return formatedDate + mark;
-                      }
+      headerFormatter: wordsVizDataProcessor.formatDateWithMarks.bind(wordsVizDataProcessor, marks),
       },
 
     }
