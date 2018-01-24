@@ -6,14 +6,15 @@
       Seleccione hasta 5 términos y estudie su evolución en el tiempo.
     </p>
 
-        <multiword-select words=wordTuples
-        selected-words = selectedWordTuples
-        select-limit = 5
-        limit-reached-msg="Solo puede seleccionar hasta cinco palabras a la vez"
-        class=""></multiword-select>
+    <multiword-select words=wordTuples
+    selected-words = selectedWordTuples
+    select-limit = 5
+    limit-reached-msg="Solo puede seleccionar hasta cinco palabras a la vez"
+    class=""></multiword-select>
 
-        <nvd3 options="options" data="d3data"></nvd3>
-        <credits></credits>
-     </div>
-    </div>
+<!--      <nvd3 options="options" data="d3data"></nvd3> -->
+     <words-viz options=options data=data selected-words=selectedWords></words-viz>
+    <credits></credits>
   </div>
+</div>
+

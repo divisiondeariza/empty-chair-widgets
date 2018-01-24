@@ -17,38 +17,37 @@ angular.module('emptyChairWidgetApp')
     ];
 
 //            Global
-    $scope.selectedWords = w.getSortedWords(data, "score", false, 3)
+    $scope.data = data;
+    $scope.options = options;
+    $scope.selectedWords = w.getSortedWords(data, "score", false, 3);
+
     $scope.$watchCollection('selectedWordTuples', function(){
       $scope.selectedWords  = $scope.selectedWordTuples.map(function(e){return e.word})
     });
-
-
-//            ControlBox
-    function mapForMultiwordSelect(element){
-      return {word:element};
-    }
-    $scope.wordTuples = w.getSortedWords(data, "lemma")
-                                        .map(mapForMultiwordSelect);
-    $scope.selectedWordTuples = $scope.selectedWords.map(mapForMultiwordSelect);
-
-
+    $scope.$watchCollection('selectedWords', function(){
+      console.log($scope.selectedWords);
+      $scope.selectedWordTuples = $scope.selectedWords.map(mapForMultiwordSelect);;
+    });
 
 //             WordsViz
-    var totaldata = w.remap(data, "norm1");
-    var marks = w.reindexMarks(data);
+
     $scope.d3data = [];
-    $scope.$watchCollection('selectedWords', function(){
-      $scope.d3data = w.getFromRemapped(totaldata, $scope.selectedWords);
-    });
     $scope.options =  options;
     $scope.options.chart.xAxis.tickFormat = w.formatDate;
+
+
+    var marks = w.reindexMarks(data);    
     $scope.options
           .chart
           .interactiveLayer = { 
                   tooltip: {
                     headerFormatter: w.formatDateWithMarks.bind(w, marks),
                   },
-    }
+    };
+    var totaldata = w.remap(data, "norm1");                              
+    $scope.$watchCollection('selectedWords', function(){
+      $scope.d3data = w.getFromRemapped(totaldata, $scope.selectedWords);
+    });
 
     $scope.options.chart.lines = {
                                    dispatch : {
@@ -59,4 +58,14 @@ angular.module('emptyChairWidgetApp')
                                       }
                                     }
                                   };
+
+
+//            ControlBox
+    function mapForMultiwordSelect(element){
+      return {word:element};
+    }
+    $scope.wordTuples = w.getSortedWords(data, "lemma")
+                                        .map(mapForMultiwordSelect);
+    $scope.selectedWordTuples = $scope.selectedWords.map(mapForMultiwordSelect);
+
   }]);
