@@ -32,7 +32,18 @@ body{
 	font-family: 'Josefin sans', sans-serif;
 	width: 100%;
 	text-align: center;
+	.social-logo{
+		img{
+			height: 25px;
+		}
 
+	}
+	.wj-logo{
+		img{
+			height: 20px;
+		}
+
+	}
 	@media screen and (max-width:  576px) {
 		//background-color: blue;	
 		font-size: 4vw;
