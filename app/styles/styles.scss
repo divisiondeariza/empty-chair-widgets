@@ -44,6 +44,7 @@ body{
 		}
 
 	}
+
 	@media screen and (max-width:  576px) {
 		//background-color: blue;	
 		font-size: 4vw;
@@ -93,7 +94,7 @@ h1{
 
 
 .nvtooltip{
-	@media(hover: none) {
+	@media (max-width: 1024px) and (hover: none) {
 		visibility: hidden;		
 	}
 }
