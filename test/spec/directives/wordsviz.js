@@ -131,33 +131,31 @@ describe('Directive: wordsViz', function () {
 
       describe("Test asynchronous calls", function(){
         var dataFromRemapedMock;
-        beforeEach(inject(function ($compile, $httpBackend) {
-        element = angular.element('<words-viz options=options data=data selected-words=selectedWords></words-viz>');
-        element = $compile(element)(scope); 
-        dataFromRemapedMock = {"another": "data"};
-        spyOn(wordsVizDataProcessor, "getFromRemapped").and.returnValue(dataFromRemapedMock); 
-        $httpBackend.when('GET', 'views/main.html').respond({});  // No sé, Ernesto, no sé.
-      }));    
+          beforeEach(inject(function ($compile, $httpBackend) {
+          element = angular.element('<words-viz options=options data=data selected-words=selectedWords></words-viz>');
+          element = $compile(element)(scope); 
+          dataFromRemapedMock = {"another": "data"};
+          spyOn(wordsVizDataProcessor, "getFromRemapped").and.returnValue(dataFromRemapedMock); 
+          $httpBackend.when('GET', 'views/main.html').respond({});  // No sé, Ernesto, no sé.
+        }));    
 
         it("should update data when updated selected words", function(){
           scope.selectedWords = ["alpha", "beta", "gamma"];
           scope.$digest();
+          expect(wordsVizDataProcessor.remap).toHaveBeenCalledWith(scope.data, "norm2");
           expect(wordsVizDataProcessor.getFromRemapped).toHaveBeenCalledWith(remapedDataMock, scope.selectedWords);
           expect(element.isolateScope().graphData).toBe(dataFromRemapedMock);
         });
 
         it("should update selectedWords with three most high values for that index, and then updates graphData", function(){  
-        var eventMock = [{"pointIndex": Math.floor(Math.random() * 1000)}]; // Maybe I'm doing it fucking wrong, but if there's something wrong this gonna fall for sure
-        var sortedWordsMock = ["alpha", "beta", "gamma"];
-        var options = element.isolateScope().options;
-        spyOn(wordsVizDataProcessor, "getSortedWordsBySerie").and.returnValue(sortedWordsMock);
-        options.chart.lines.dispatch.elementClick(eventMock);
-        expect(wordsVizDataProcessor.getSortedWordsBySerie).toHaveBeenCalledWith(scope.data, "norm1", eventMock[0].pointIndex, false, 3);
-        expect(element.isolateScope().graphData).toBe(dataFromRemapedMock);
-        expect(scope.selectedWords).toBe(sortedWordsMock);
-
-
-
+          var eventMock = [{"pointIndex": Math.floor(Math.random() * 1000)}]; // Maybe I'm doing it fucking wrong, but if there's something wrong this gonna fall for sure
+          var sortedWordsMock = ["alpha", "beta", "gamma"];
+          var options = element.isolateScope().options;
+          spyOn(wordsVizDataProcessor, "getSortedWordsBySerie").and.returnValue(sortedWordsMock);
+          options.chart.lines.dispatch.elementClick(eventMock);
+          expect(wordsVizDataProcessor.getSortedWordsBySerie).toHaveBeenCalledWith(scope.data, "norm2", eventMock[0].pointIndex, false, 3);
+          expect(element.isolateScope().graphData).toBe(dataFromRemapedMock);
+          expect(scope.selectedWords).toBe(sortedWordsMock);
       })
 
       });

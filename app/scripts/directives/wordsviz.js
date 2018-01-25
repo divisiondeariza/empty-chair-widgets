@@ -19,7 +19,7 @@ angular.module('emptyChairWidgetApp')
                         headerFormatter: w.formatDateWithMarks.bind(w, marks),
                       },
         };
-        var totaldata = w.remap(scope.data, "norm1");   
+        var totaldata = w.remap(scope.data, "norm2");   
         scope.$watchCollection('selectedWords', function(){
           scope.graphData = w.getFromRemapped(totaldata, scope.selectedWords);
         });
@@ -34,7 +34,7 @@ angular.module('emptyChairWidgetApp')
 
         function elementClick(e){ 
             var index = e[0].pointIndex;
-            scope.selectedWords = w.getSortedWordsBySerie(scope.data, "norm1", index, false, 3);
+            scope.selectedWords = w.getSortedWordsBySerie(scope.data, "norm2", index, false, 3);
             scope.$apply();
             }
     };
