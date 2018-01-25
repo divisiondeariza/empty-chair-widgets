@@ -43,7 +43,7 @@ angular
         controllerAs: 'wgVargasLlerasDiscurso',
         resolve:{
           data: function(jsonGetter){ return jsonGetter.get('data/vargas-lleras-words');},
-          options: function(jsonGetter){ return jsonGetter.get('options/vargas-lleras-words.conf');} 
+          options: function(jsonGetter){ return jsonGetter.get('options/wordsviz.conf');} 
         },
       })
       .otherwise({
