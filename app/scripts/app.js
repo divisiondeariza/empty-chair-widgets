@@ -46,6 +46,15 @@ angular
           options: function(jsonGetter){ return jsonGetter.get('options/wordsviz.conf');} 
         },
       })
+      .when('/widgets/timochenko-discurso', {
+        templateUrl: 'views/wg-timochenko-discurso.html',
+        controller: 'WgVargasLlerasDiscursoCtrl',
+        controllerAs: 'wgTimochenkoDiscurso',
+        resolve:{
+          data: function(jsonGetter){ return jsonGetter.get('data/timochenko-words');},
+          options: function(jsonGetter){ return jsonGetter.get('options/wordsviz.conf');} 
+        },
+      })
       .otherwise({
         redirectTo: '/'
       });

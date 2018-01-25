@@ -30,7 +30,8 @@
     this.reindexMarks = function(data){
     	var dates =  getDates(data);
     	var marks  = {};
-    	Object.keys(data.marks).forEach(updateMarks.bind(null, data, dates, marks));
+      if(data.marks)
+    	  Object.keys(data.marks).forEach(updateMarks.bind(null, data, dates, marks));
     	return marks;
     };
 

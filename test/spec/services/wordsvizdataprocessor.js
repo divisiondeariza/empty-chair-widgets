@@ -150,6 +150,12 @@ describe('Service: wordsVizDataProcessor', function () {
       }
     });
     describe("reindexing marks", function(){
+      it("should return an empty object when no marks given", function(){
+        datamock.marks =  undefined;
+        var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
+        expect(reindexedMarks).toEqual({}); 
+      })
+
       it('should reindex marks to the nearest date in dates', function(){
         var reindexedMarks = wordsVizDataProcessor.reindexMarks(datamock);
         expect(reindexedMarks).toEqual({
