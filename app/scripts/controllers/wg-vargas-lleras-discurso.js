@@ -29,36 +29,6 @@ angular.module('emptyChairWidgetApp')
       $scope.selectedWordTuples = $scope.selectedWords.map(mapForMultiwordSelect);;
     });
 
-//             WordsViz
-
-    $scope.d3data = [];
-    $scope.options =  options;
-    $scope.options.chart.xAxis.tickFormat = w.formatDate;
-
-
-    var marks = w.reindexMarks(data);    
-    $scope.options
-          .chart
-          .interactiveLayer = { 
-                  tooltip: {
-                    headerFormatter: w.formatDateWithMarks.bind(w, marks),
-                  },
-    };
-    var totaldata = w.remap(data, "norm1");                              
-    $scope.$watchCollection('selectedWords', function(){
-      $scope.d3data = w.getFromRemapped(totaldata, $scope.selectedWords);
-    });
-
-    $scope.options.chart.lines = {
-                                   dispatch : {
-                                    elementClick: function(e){ 
-                                      var index = e[0].pointIndex;
-                                      $scope.selectedWords = w.getSortedWordsBySerie(data, "norm1", index, false, 3)
-                                      $scope.$digest();
-                                      }
-                                    }
-                                  };
-
 
 //            ControlBox
     function mapForMultiwordSelect(element){

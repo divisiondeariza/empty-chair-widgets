@@ -11,11 +11,11 @@
         "useInteractiveGuideline": true,
         "dispatch": {},
         "xAxis": {
-            "axisLabel": "Fecha",
+            "axisLabel": "X Axis",
             "showMaxMin": false
         },
         "yAxis": {
-            "axisLabel": "frencuencia de uso semanal",
+            "axisLabel": "Y Axis",
             "axisLabelDistance": -10,
             "showMaxMin": false
         },
@@ -44,7 +44,7 @@
     },
     "caption": {
         "enable": true,
-        "html": "Análisis de 3528 tweets de Germán Vargas Lleras (@German_Vargas) entre diciembre de 2015 y enero de 2018",
+        "text": "Caption Text",
         "css": {
             "text-align": "center",
             "margin": "10px 13px 0px 7px"

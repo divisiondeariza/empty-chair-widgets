@@ -28,12 +28,17 @@ angular.module('emptyChairWidgetApp')
                                     elementClick: elementClick
                                     }
                                   };
+        scope.options.chart.xAxis.axisLabel = scope.axisLabelX;
+        scope.options.chart.yAxis.axisLabel = scope.axisLabelY;
+        scope.options.caption.text = scope.caption;
+
         function elementClick(e){ 
             var index = e[0].pointIndex;
             scope.selectedWords = w.getSortedWordsBySerie(scope.data, "norm1", index, false, 3);
             scope.$apply();
             }
-        };
+    };
+
 
     return {
       template: '<nvd3 options="options" data="graphData"></nvd3>',
@@ -41,7 +46,10 @@ angular.module('emptyChairWidgetApp')
       scope: {
       	options: "<",
       	data:    "<",
-      	selectedWords: "="
+      	selectedWords: "=",
+        axisLabelX: "@",
+        axisLabelY: "@",
+        caption: "@",
       },
       link: postLink
       }
