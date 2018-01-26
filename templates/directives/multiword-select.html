@@ -18,7 +18,8 @@
 					<span ng-repeat="wordData in words| filter:category:true:category">
 						<a ng-bind="wordData.word"
 						   ng-class="isSelected(wordData)?'selected':''"
-							ng-click="toggleWord(wordData)">
+							ng-click="toggleWord(wordData)"
+							class = "{{wordData.class}}">
 							
 						</a>
 					</span>
