@@ -36,8 +36,11 @@
     };
 
     this.formatDateWithMarks = function(marks, d){
-        var formatedDate = this.formatDate(d);
-        var mark = marks[formatedDate]? "<p>" + marks[formatedDate] + "</p>":"";
+        var simpleFormatedDate = this.formatDate(d);
+        var date = new Date(d);
+        date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );       
+        var formatedDate = (new Date(date)).toLocaleDateString("es-ES", {month: 'long', day: 'numeric' });
+        var mark = marks[simpleFormatedDate]? "<p>" + marks[simpleFormatedDate] + "</p>":"";
         return formatedDate + mark;
     };
 

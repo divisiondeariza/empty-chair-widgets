@@ -196,7 +196,7 @@ describe('Service: wordsVizDataProcessor', function () {
         };
         var date = new Date("2015-06-03");
         var formattedDate =  wordsVizDataProcessor.formatDateWithMarks(marks, date);
-        expect(formattedDate).toEqual("2015-06-03");
+        expect(formattedDate).toEqual("June 3, 2015");
 
       });      
 
@@ -207,7 +207,7 @@ describe('Service: wordsVizDataProcessor', function () {
         };
         var date = new Date("2015-06-03");
         var formattedDate =  wordsVizDataProcessor.formatDateWithMarks(marks, date);
-        expect(formattedDate).toEqual("2015-06-03<p>fact 1</p>");
+        expect(formattedDate).toEqual("June 3, 2015<p>fact 1</p>");
 
       });      
     })
