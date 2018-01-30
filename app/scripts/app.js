@@ -55,6 +55,11 @@ angular
           options: function(jsonGetter){ return jsonGetter.get('options/wordsviz.conf');} 
         },
       })
+      .when('/test/conversaciones', {
+        templateUrl: 'views/conversaciones.html',
+        controller: 'ConversacionesCtrl',
+        controllerAs: 'conversaciones'
+      })
       .otherwise({
         redirectTo: '/'
       });
