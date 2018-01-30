@@ -1,21 +1,4 @@
 /* latin */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(https://fonts.gstatic.com/s/josefinsans/v12/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
-}
-
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(https://fonts.gstatic.com/s/josefinsans/v12/C6HYlRF50SGJq1XyXj04z04GofcKVZz6wtzX_QUIqsI.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
-}
-
-
 body{
 	background-color:#404041;
 	color:white;
@@ -23,45 +6,6 @@ body{
 	h1{
 		font-family: 'lato', sans-serif;
 
-	}
-}
-
-.credits{
-	margin-top: 10px;
-	font-size: 18px;
-	font-family: 'Josefin sans', sans-serif;
-	width: 100%;
-	text-align: center;
-	.social-logo{
-		img{
-			height: 25px;
-		}
-
-	}
-	.wj-logo{
-		img{
-			height: 20px;
-		}
-
-	}
-
-	@media screen and (max-width:  576px) {
-		//background-color: blue;	
-		font-size: 4vw;
-		.social-logo{
-			img{
-				width: 4vw;	
-				height: auto;
-			}
-
-		}
-		.wj-logo{
-			img{
-				width: 35vw;	
-				height: auto;
-			}
-
-		}
 	}
 }
 
@@ -99,12 +43,13 @@ h1{
 	}
 }
 
+.nvd3 line.nv-guideline {
+    stroke: white !important;
+}
+
 .panel-default{
 	background-color: transparent;
 	border:0;
 }
 
 
-.nvd3 line.nv-guideline {
-    stroke: white !important;
-}

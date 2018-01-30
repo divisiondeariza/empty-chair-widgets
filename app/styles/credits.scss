@@ -1,0 +1,38 @@
+.credits{
+	margin-top: 10px;
+	font-size: 18px;
+	font-family: 'Josefin sans', sans-serif;
+	width: 100%;
+	text-align: center;
+	.social-logo{
+		img{
+			height: 25px;
+		}
+
+	}
+	.wj-logo{
+		img{
+			height: 20px;
+		}
+
+	}
+
+	@media screen and (max-width:  576px) {
+		//background-color: blue;	
+		font-size: 4vw;
+		.social-logo{
+			img{
+				width: 4vw;	
+				height: auto;
+			}
+
+		}
+		.wj-logo{
+			img{
+				width: 35vw;	
+				height: auto;
+			}
+
+		}
+	}
+}
