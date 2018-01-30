@@ -47,7 +47,7 @@
     this.formatDate =function(d){
         var date = new Date(d);
         date.setTime( date.getTime() + date.getTimezoneOffset()*60*1000 );
-        return d3.time.format('%Y-%m-%d')(new Date(date));
+        return d3.time.format('%Y-%m')(new Date(date));
     };
 
     this.getFromRemapped = function(remapedData, wordsList){

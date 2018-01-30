@@ -42,7 +42,6 @@ angular.module('emptyChairWidgetApp')
     }
 
 
-
     $scope.wordTuples = w.getSortedWords(data, "lemma")
                                         .map(mapForMultiwordSelect);
 
