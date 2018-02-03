@@ -17,8 +17,6 @@ body{
 		padding-right: 10px;
 
 	}
-
-
 	.caption{
 		font-size: 10px;
 	}
@@ -27,7 +25,7 @@ body{
 
 
 svg text {
-	    fill: white;
+	fill: white;
 }
 
 h1{
@@ -44,7 +42,7 @@ h1{
 }
 
 .nvd3 line.nv-guideline {
-    stroke: white !important;
+	stroke: white !important;
 }
 
 .panel-default{
@@ -52,4 +50,34 @@ h1{
 	border:0;
 }
 
+.talk-viz{
+	.nvd3{
+		.nv-y{
 
+			path.domain{
+				stroke-opacity: 0;
+			}
+			.zero line{
+				stroke:#fff;
+				stroke-width:3;
+			}	
+		}			
+		.nv-x{
+			path.domain{
+				stroke-opacity: #F7941E
+			}
+			.zero line{
+				stroke:#f7941e;
+				stroke-width:3;
+			}	
+
+		}
+
+		.tick{
+			line{
+				stroke:#888;
+			}
+		}
+
+	}
+}

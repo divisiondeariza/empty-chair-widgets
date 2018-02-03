@@ -8,103 +8,77 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('ConversacionesCtrl', ["$scope", function ($scope) {
+  .controller('ConversacionesCtrl', ["$scope", "options", function ($scope, options) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
- $scope.options = {
-            chart: {
-                type: 'scatterChart',
-                height: 450,
-                color: d3.scale.category10().range(),
-                scatter: {
-                    onlyCircles: false
-                },
-                showDistX: false,
-                showDistY: false,
-                tooltipContent: function(key) {
-                    return '<h3>' + key + '</h3>';
-                },
-                duration: 350,
-                xAxis: {
-                    axisLabel: 'X Axis',
-                    tickFormat: function(d){
-                        return d3.format('.02f')(d);
-                    },
-                    tickValues:[0]
+    $scope.options = options;
+    $scope.options.chart.yAxis.tickFormat = d3.format('.02f');
+    $scope.options.chart.xAxis.tickFormat = d3.format('.02f');
+    $scope.options.chart.tooltip =  {
+                contentGenerator: function (e) {
+                  var series = e.series[0];
+                  var point = e.point;
+                  if (series.value === null) return;
+                  
+                  var rows = 
+                    "<tr>" +
+                      "<td class='key'>" + 'Time: ' + "</td>" +
+                      "<td class='x-value'>" + e.value + "</td>" + 
+                    "</tr>" +
+                    "<tr>" +
+                      "<td class='key'>" + 'Voltage: ' + "</td>" +
+                      "<td class='x-value'><strong>" + (series.value?series.value.toFixed(2):0) + "</strong></td>" +
+                    "</tr>";
 
-                },
-                yAxis: {
-                    axisLabel: 'Y Axis',
-                    tickFormat: function(d){
-                        return d3.format('.02f')(d);
-                    },
-                    axisLabelDistance: 30,
-                    tickValues:[0]
-
-                },
-                zoom: {
-                    //NOTE: All attributes below are optional
-                    enabled: false,
-                    scaleExtent: [1, 10],
-                    useFixedDomain: true,
-                    useNiceScale: false,
-                    horizontalOff: false,
-                    verticalOff: false,
-                    unzoomEventType: 'dblclick.zoom'
-                }
-            }
-        };
+                  var header = 
+                    "<thead>" + 
+                      "<tr>" +
+                        "<td class='legend-color-guide'><div style='background-color: " + series.color + ";'></div></td>" +
+                        "<td class='key'><strong>" + point.word + "</strong></td>" +
+                      "</tr>" + 
+                    "</thead>";
+                    
+                  return "<table>" +
+                      header +
+                      "<tbody>" + 
+                        rows + 
+                      "</tbody>" +
+                    "</table>";
+                } 
+              }
 
 
-        $scope.data = generateData(4,40);
+    $scope.data = generateData(4,40);
 
-        /* Random Data Generator (took from nvd3.org) */
-        function generateData(groups, points) { //# groups,# points per group
-                            console.log(d3.random);
-            var data = [],
-                shapes = ['circle'],
-                random = d3.random.normal();
+    /* Random Data Generator (took from nvd3.org) */
+    function generateData(groups, points) { //# groups,# points per group
+        var data = [],
+            shapes = ['circle'],
+            random = d3.random.normal();
 
 
 
-            for (var i = 0; i < groups; i++) {
-                data.push({
-                    key: 'Group ' + i,
-                    values: [],
-                });
-
-                for (var j = 0; j < points; j++) {
-                    data[i].values.push({
-                        x: Math.random()*2 -1,
-                        y: Math.random(),
-                        size: Math.random() * 5,
-                        shape: shapes[j % 6]
-                    });
-                }
-            }
-
+        for (var i = 0; i < groups; i++) {
             data.push({
-                    key: 'rect',
-                    values: [],
-                    slope: 1,
-                    intercept: Number.MIN_VALUE, // Fucking awful hack
-                    color: 'white',
-                });
+                key: 'Group ' + i,
+                values: [],
+            });
 
-            data.push({
-                    key: 'rect',
-                    values: [],
-                    slope: -1,
-                    intercept: Number.MIN_VALUE, // Fucking awful hack
-                    color: 'white',
+            for (var j = 0; j < points; j++) {
+                data[i].values.push({
+                    x: Math.random()*2 -1,
+                    y: Math.random() - 0.1,
+                    size: Math.random() * 5,
+                    shape: shapes[j % 6],
+                    word: "some word"
                 });
-            console.log(Math.MIN_VALUE);
-            return data;
+            }
         }
 
-
+        return data;
+    }
 
   }]);

@@ -58,7 +58,11 @@ angular
       .when('/test/conversaciones', {
         templateUrl: 'views/conversaciones.html',
         controller: 'ConversacionesCtrl',
-        controllerAs: 'conversaciones'
+        controllerAs: 'conversaciones',
+        resolve:{
+          // data: function(jsonGetter){ return jsonGetter.get('data/timochenko-words');},
+          options: function(jsonGetter){ return jsonGetter.get('options/talkviz.conf');} 
+        },
       })
       .otherwise({
         redirectTo: '/'
