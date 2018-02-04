@@ -15,8 +15,6 @@ angular.module('emptyChairWidgetApp')
       'Karma'
     ];
     $scope.options = options;
-    $scope.options.chart.yAxis.tickFormat = d3.format('.02f');
-    $scope.options.chart.xAxis.tickFormat = d3.format('.02f');
     $scope.options.chart.tooltip =  {
                 contentGenerator: function (e) {
                   var series = e.series[0];

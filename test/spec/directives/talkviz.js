@@ -12,33 +12,40 @@ describe('Directive: talkViz', function () {
     scope = $rootScope.$new();
   }));
 
-    describe("test render", function(){
+  beforeEach(inject(function ($rootScope, $compile) {
+    scope = $rootScope.$new();
+    scope.options = {
+      chart: {
+        xAxis:           {tickFormat: null, axisLabel: "any label"},
+        yAxis:           {tickFormat: null, axisLabel: "any label"},  
+        interactiveLayer: null,
+        lines:            null  
+      },
+      caption: {text: "any caption"} 
+    };
+    element = angular.element('<talk-viz options=options data=data></talk-viz>');
+    element = $compile(element)(scope);     
 
-      beforeEach(inject(function ($rootScope, _wordsVizDataProcessor_) {
-        scope = $rootScope.$new();
-        scope.options = {
-          chart: {
-            xAxis:           {tickFormat: null, axisLabel: "any label"},
-            yAxis:           {tickFormat: null, axisLabel: "any label"},  
-            interactiveLayer: null,
-            lines:            null  
-          },
-          caption: {text: "any caption"}
-        };
+  }));
 
-      }));
+  describe("test render", function(){
+    it('should have set the correct template', function(){
+      expect(element.html()).toBe('<nvd3 class="talk-viz ng-isolate-scope" options="options" data="data"></nvd3>');
+    });
 
-      it('should have set the correct template', inject(function ($compile) {
-        element = angular.element('<talk-viz options=options data=data></talk-viz>');
-        element = $compile(element)(scope);       
-        expect(element.html()).toBe('<nvd3 class="talk-viz ng-isolate-scope" options="options" data="data"></nvd3>');
-      }));
+  });
 
-    })
+  describe("Options setting", function(){
+    it('should set yAxis tickFormat to format to two decimal places',  function() {
+      var options = element.isolateScope().options;
+      expect(options.chart.yAxis.tickFormat(Math.PI)).toEqual('3.14')
+    });
 
-/*  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<talk-viz></talk-viz>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the talkViz directive');
-  }));*/
+    it('should set xAxis tickFormat to format to two decimal places',  function() {
+      var options = element.isolateScope().options;
+      expect(options.chart.xAxis.tickFormat(Math.PI)).toEqual('3.14')
+    });
+
+  })
+
 });
