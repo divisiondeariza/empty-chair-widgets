@@ -15,7 +15,7 @@ angular.module('emptyChairWidgetApp')
       'Karma'
     ];
     $scope.options = options;
-    $scope.options.chart.tooltip =  {
+/*    $scope.options.chart.tooltip =  {
                 contentGenerator: function (e) {
                   var series = e.series[0];
                   var point = e.point;
@@ -46,7 +46,7 @@ angular.module('emptyChairWidgetApp')
                       "</tbody>" +
                     "</table>";
                 } 
-              }
+              }*/
 
 
     $scope.data = generateData(4,40);

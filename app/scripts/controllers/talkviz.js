@@ -9,12 +9,6 @@
  */
 angular.module('emptyChairWidgetApp')
   .controller('TalkvizCtrl', ["$scope", function ($scope) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
     $scope.htmlTooltipGenerator = function(e){
                   var series = e.series[0];
                   var point = e.point;

@@ -17,10 +17,6 @@ describe('Controller: TalkvizCtrl', function () {
     });
   }));
 
-  xit('should attach a list of awesomeThings to the scope', function () {
-    expect(TalkvizCtrl.awesomeThings.length).toBe(3);
-  });
-
   it('Should return html for tooltip when htmlTooltipGenerator is called',function(){
     var elementMock = {
       value: 5,

@@ -6,13 +6,10 @@ describe('Directive: talkViz', function () {
   beforeEach(module('emptyChairWidgetApp'));
 
   var element,
-    scope;
+    scope,
+    TalkvizCtrl;
 
-  beforeEach(inject(function ($rootScope) {
-    scope = $rootScope.$new();
-  }));
-
-  beforeEach(inject(function ($rootScope, $compile) {
+  beforeEach(inject(function ($rootScope, $compile, _$controller_) {
     scope = $rootScope.$new();
     scope.options = {
       chart: {
@@ -23,6 +20,7 @@ describe('Directive: talkViz', function () {
       },
       caption: {text: "any caption"} 
     };
+    TalkvizCtrl = _$controller_('TalkvizCtrl', {$scope: scope} );
     element = angular.element('<talk-viz options=options data=data></talk-viz>');
     element = $compile(element)(scope);     
 
@@ -46,6 +44,22 @@ describe('Directive: talkViz', function () {
       expect(options.chart.xAxis.tickFormat(Math.PI)).toEqual('3.14')
     });
 
+    it('should set TalkvizCtrl.htmlTooltipGenerator to chart.tooltip.contentGenerator',  function() {
+      var elementMock = {
+                        value: 5,
+                        series:[
+                          {value: Math.PI,
+                           color: "red"
+                          }],
+                        point:{
+                          word:"some-word"
+                        }
+                      };
+      var options = element.isolateScope().options;
+      expect(scope.htmlTooltipGenerator(elementMock)).toEqual(options.chart.tooltip.contentGenerator(elementMock));
+
+      //expect(options.chart.tooltip.contentGenerator(elementMock)).toEqual(htmlTooltipGeneratorMock(elementMock))
+    });
   })
 
 });
