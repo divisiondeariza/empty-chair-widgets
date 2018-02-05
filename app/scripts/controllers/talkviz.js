@@ -16,11 +16,11 @@ angular.module('emptyChairWidgetApp')
                   
                   var rows = 
                     "<tr>" +
-                      "<td class='key'>" + 'Time: ' + "</td>" +
-                      "<td class='x-value'>" + e.value + "</td>" + 
+                      "<td class='key'>" + 'Sentimiento: ' + "</td>" +
+                      "<td class='x-value'>" + e.value.toFixed(2) + "</td>" + 
                     "</tr>" +
                     "<tr>" +
-                      "<td class='key'>" + 'Voltage: ' + "</td>" +
+                      "<td class='key'>" + 'Magnitud: ' + "</td>" +
                       "<td class='x-value'><strong>" + (series.value?series.value.toFixed(2):0) + "</strong></td>" +
                     "</tr>";
 
@@ -38,5 +38,12 @@ angular.module('emptyChairWidgetApp')
                         rows + 
                       "</tbody>" +
                     "</table>";    	
+    }
+
+    $scope.select = function(element, event){
+        $scope.selectedWord  = event.point.word;
+        element.find(".nv-point").removeClass("selected");
+        var subElement = element[0].querySelector(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
+        angular.element(subElement).addClass("selected");
     }
   }]);

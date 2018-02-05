@@ -23,6 +23,13 @@ angular.module('emptyChairWidgetApp')
       		contentGenerator: scope.htmlTooltipGenerator,
       	}
         //element.text('this is the talkViz directive');
+
+        scope.options.chart.scatter = {
+          dispatch:{
+            elementClick: scope.select.bind(null,element)
+
+          }
+        }
       }
     };
   });

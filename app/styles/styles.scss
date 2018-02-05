@@ -80,4 +80,10 @@ h1{
 		}
 
 	}
+
+	.selected{
+		stroke-width: 7px;
+		fill-opacity: .95 !important;
+		stroke-opacity: .95 !important;
+	}
 }
