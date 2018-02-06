@@ -21,7 +21,7 @@ describe('Directive: talkViz', function () {
       caption: {text: "any caption"} 
     };
     TalkvizCtrl = _$controller_('TalkvizCtrl', {$scope: scope} );
-    element = angular.element('<talk-viz options=options data=data></talk-viz>');
+    element = angular.element('<talk-viz options=options data=data word=word></talk-viz>');
     element = $compile(element)(scope);     
 
   }));
@@ -67,6 +67,13 @@ describe('Directive: talkViz', function () {
       spyOn(element.isolateScope(), "selectPoint");
       spyOn(element.isolateScope(), "getWord").and.returnValue(wordMock);
     });
+
+    xit("should not set anything in chart.scatter.dispatch.elementClick when no word bind given", inject(function($compile){
+      element = angular.element('<talk-viz options=options data=data></talk-viz>');
+      element = $compile(element)(scope);  
+      var options = element.isolateScope().options;
+      expect(options.chart.scatter.dispatch.elementClick).not.toBeDefined()
+    }));
 
     it("should call scope.selected correctly", function(){
       var options = element.isolateScope().options;

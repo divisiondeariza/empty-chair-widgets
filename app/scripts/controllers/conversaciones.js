@@ -11,8 +11,14 @@ angular.module('emptyChairWidgetApp')
   .controller('ConversacionesCtrl', ["$scope", "options", function ($scope, options) {
 
     $scope.options = options;
-    $scope.data = generateData(4,5);
+    $scope.data = generateData(5,5);
+    $scope.data2 = generateData(4,1);
     $scope.selectedWord = "Kraftwerk"
+
+    $scope.$watch('selectedWord', function() {
+        console.log($scope.selectedWord);
+    });
+
 
     /* Random Data Generator (took from nvd3.org) */
     function generateData(groups, points) { //# groups,# points per group

@@ -42,8 +42,7 @@ angular.module('emptyChairWidgetApp')
 
     $scope.selectPoint = function(element, event){
         element.find(".nv-point").removeClass("selected");
-        // element.find(".nv-point").removeClass("hover");
-        var subElement = element[0].querySelector(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
+        var subElement = element.find(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
         angular.element(subElement).addClass("selected");
     }
 
