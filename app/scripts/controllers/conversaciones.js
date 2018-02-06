@@ -12,6 +12,7 @@ angular.module('emptyChairWidgetApp')
 
     $scope.options = options;
     $scope.data = generateData(4,5);
+    $scope.selectedWord = "Kraftwerk"
 
     /* Random Data Generator (took from nvd3.org) */
     function generateData(groups, points) { //# groups,# points per group

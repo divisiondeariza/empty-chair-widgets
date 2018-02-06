@@ -11,7 +11,8 @@ angular.module('emptyChairWidgetApp')
     return {
       scope: {
       	options: "<",
-      	data:    "<",      	
+      	data:    "<",
+        word: "="      	
       },
       template: '<nvd3 class="talk-viz" options="options" data="data"></nvd3>',
       restrict: 'E',
@@ -22,12 +23,13 @@ angular.module('emptyChairWidgetApp')
       	scope.options.chart.tooltip =  {
       		contentGenerator: scope.htmlTooltipGenerator,
       	}
-        //element.text('this is the talkViz directive');
-
         scope.options.chart.scatter = {
           dispatch:{
-            elementClick: scope.select.bind(null,element)
-
+            elementClick: function(event){
+              scope.word = scope.getWord(event);
+              // scope.$digest(); 
+              scope.selectPoint(element, event);
+            }
           }
         }
       }

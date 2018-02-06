@@ -40,10 +40,14 @@ angular.module('emptyChairWidgetApp')
                     "</table>";    	
     }
 
-    $scope.select = function(element, event){
-        $scope.selectedWord  = event.point.word;
+    $scope.selectPoint = function(element, event){
         element.find(".nv-point").removeClass("selected");
+        // element.find(".nv-point").removeClass("hover");
         var subElement = element[0].querySelector(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
         angular.element(subElement).addClass("selected");
+    }
+
+    $scope.getWord = function(event){
+      return event.point.word;
     }
   }]);

@@ -45,7 +45,7 @@ describe('Directive: talkViz', function () {
     });
 
     it('should set TalkvizCtrl.htmlTooltipGenerator to chart.tooltip.contentGenerator',  function() {
-      var elementMock = {
+      var eventMock = {
                         value: 5,
                         series:[
                           {value: Math.PI,
@@ -56,10 +56,31 @@ describe('Directive: talkViz', function () {
                         }
                       };
       var options = element.isolateScope().options;
-      expect(scope.htmlTooltipGenerator(elementMock)).toEqual(options.chart.tooltip.contentGenerator(elementMock));
-
-      //expect(options.chart.tooltip.contentGenerator(elementMock)).toEqual(htmlTooltipGeneratorMock(elementMock))
+      expect(scope.htmlTooltipGenerator(eventMock)).toEqual(options.chart.tooltip.contentGenerator(eventMock));
     });
+
+  });
+
+  describe("On click in nodes", function(){
+    var wordMock = "the-word";
+    beforeEach(function(){
+      spyOn(element.isolateScope(), "selectPoint");
+      spyOn(element.isolateScope(), "getWord").and.returnValue(wordMock);
+    });
+
+    it("should call scope.selected correctly", function(){
+      var options = element.isolateScope().options;
+      var eventMock = {};
+      options.chart.scatter.dispatch.elementClick(event);
+      expect(element.isolateScope().selectPoint).toHaveBeenCalledWith(element, event)
+    });
+
+    it("should set word as value returned by getWords", function(){
+      var options = element.isolateScope().options;
+      var eventMock = {};
+      options.chart.scatter.dispatch.elementClick(event);
+      expect(element.isolateScope().word).toEqual(wordMock);      
+    })
   })
 
 });

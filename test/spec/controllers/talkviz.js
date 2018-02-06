@@ -66,15 +66,15 @@ describe('Controller: TalkvizCtrl', function () {
     }));
 
     it('should toggle the select class given the directive DOM and the event', inject(function($compile){
-      scope.select(element, event)
+      scope.selectPoint(element, event);
       var elementFound = element.find(".selected")[0];
       expect(elementFound.className.baseVal).toEqual('nv-point nv-point-4 selected')
 
     }))
 
     it('should set word of selected in scope', function(){
-      scope.select(element, event)
-      expect(scope.selectedWord).toEqual(event.point.word);
+      var word = scope.getWord(event);
+      expect(word).toEqual(event.point.word);
     })
 
   })
