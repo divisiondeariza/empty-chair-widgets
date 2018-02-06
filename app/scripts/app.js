@@ -55,6 +55,15 @@ angular
           options: function(jsonGetter){ return jsonGetter.get('options/wordsviz.conf');} 
         },
       })
+      .when('/widgets/fajardo-conversacion', {
+        templateUrl: 'views/wg-fajardo-conversacion.html',
+        controller: 'WgFajardoConversacionCtrl',
+        controllerAs: 'wgFajardoConversacion',
+        resolve:{
+          // data: function(jsonGetter){ return jsonGetter.get('data/timochenko-words');},
+          options: function(jsonGetter){ return jsonGetter.get('options/talkviz.conf');} 
+        },
+      })
       .otherwise({
         redirectTo: '/'
       });
