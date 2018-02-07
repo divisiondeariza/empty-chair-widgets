@@ -8,10 +8,13 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
   var WgFajardoConversacionCtrl,
     scope,
     options,
-    $document;
+    data,
+    $document,
+    talkParser,
+    tagsMock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $compile) {
+  beforeEach(inject(function ($controller, $rootScope, $compile, _talkParser_) {
     scope = $rootScope.$new();
     options = {chart:{
       scatter:{},
@@ -23,6 +26,10 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
         tickFormat: function(v){return v}
       },
     }};
+    data = {_words:{}};
+    tagsMock = ["a", "b"];
+    talkParser = _talkParser_;
+    spyOn(talkParser, "getTags").and.returnValue(tagsMock);
     var html =  "<div id='some-id'>" +
             "<svg>" +
               "<g class='nv-group nv-series-1'>" +
@@ -40,6 +47,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     WgFajardoConversacionCtrl = $controller('WgFajardoConversacionCtrl', {
       $scope: scope,
       options: options,
+      data: data
       // place here mocked dependencies
     });
   }));
@@ -115,5 +123,13 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
         expect(options.chart.scatter.dispatch).not.toBeDefined();
       })
     })
+  });
+
+  describe('parsing words', function(){
+    it("should set scope.tags correcty", function(){
+      expect(talkParser.getTags).toHaveBeenCalledWith(data._words);
+      expect(scope.tags).toEqual(tagsMock);
+    })
+
   })
 });

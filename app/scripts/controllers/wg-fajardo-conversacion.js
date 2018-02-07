@@ -8,7 +8,8 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgFajardoConversacionCtrl', ["$scope", "options", function ($scope, options) {
+  .controller('WgFajardoConversacionCtrl', ["$scope", "talkParser", "options", "data", function ($scope, talkParser, options, data) {
+
     $scope.selectPoint = function(id, event){
     	var element = angular.element("#" + id);
         element.find(".nv-point").removeClass("selected");
@@ -27,8 +28,9 @@ angular.module('emptyChairWidgetApp')
             }
           }
 	}
-// NOT TESTED
+    $scope.tags = talkParser.getTags(data._words);
 
+// NOT TESTED
 
     $scope.data = generateData(5,5);
 
