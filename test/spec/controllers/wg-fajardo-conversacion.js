@@ -11,11 +11,12 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     data,
     $document,
     talkParser,
+    tooltopGenerator,
     tagsMock,
     remappedMock;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $compile, _talkParser_) {
+  beforeEach(inject(function ($controller, $rootScope, $compile, _talkParser_, _tooltipGenerator_) {
     scope = $rootScope.$new();
     options = {chart:{
       scatter:{},
@@ -26,13 +27,16 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
       yAxis:{
         tickFormat: function(v){return v}
       },
+      tooltip: {}
     }};
     data = {_words:{}};
     tagsMock = ["a", "b"];
     talkParser = _talkParser_;
+    tooltopGenerator = _tooltipGenerator_;
     remappedMock = {};
     spyOn(talkParser, "remapAndRegroupByTags").and.returnValue(remappedMock);
     spyOn(talkParser, "getTags").and.returnValue(tagsMock);
+    spyOn(tooltopGenerator, "generateTalkVizTooltip");
     var html =  "<div id='some-id'>" +
             "<svg>" +
               "<g class='nv-group nv-series-1'>" +
@@ -99,12 +103,18 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
       });
 
+      it("should set tooltop.contentGenerator", function(){
+        var eventMock = {};
+        options.chart.tooltip.contentGenerator(eventMock);
+        expect(tooltopGenerator.generateTalkVizTooltip).toHaveBeenCalledWith(eventMock);
+      });
+
       it("should call selectPoint when clicked", function(){
         var eventMock = {}
         spyOn(scope, "selectPoint");
         options.chart.scatter.dispatch.elementClick(eventMock);
         expect(scope.selectPoint).toHaveBeenCalledWith("said-words-viz", eventMock);
-      })
+      });
     });
 
     describe("slave option", function(){
@@ -124,6 +134,12 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
       it("should set xAxis.tickFormat", function(){
         var formater = options.chart.yAxis.tickFormat
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
+      });
+      
+      it("should set tooltop.contentGenerator", function(){
+        var eventMock = {};
+        options.chart.tooltip.contentGenerator(eventMock);
+        expect(tooltopGenerator.generateTalkVizTooltip).toHaveBeenCalledWith(eventMock);
       });
 
       it("should not be defined chart.scatter.dispatch", function(){

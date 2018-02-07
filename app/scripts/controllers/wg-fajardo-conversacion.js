@@ -8,7 +8,11 @@
  * Controller of the emptyChairWidgetApp
  */
 angular.module('emptyChairWidgetApp')
-  .controller('WgFajardoConversacionCtrl', ["$scope", "talkParser", "options", "data", function ($scope, talkParser, options, data) {
+  .controller('WgFajardoConversacionCtrl', ["$scope", 
+                                            "talkParser",
+                                            "options",
+                                            "data",
+                                            "tooltipGenerator", function ($scope, talkParser, options, data, tooltipGenerator) {
 
     $scope.selectPoint = function(id, event){
     	var element = angular.element("#" + id);
@@ -22,6 +26,7 @@ angular.module('emptyChairWidgetApp')
     $scope.masterOptions =  options;
     $scope.masterOptions.chart.xAxis.tickFormat = d3.format('.02f');
     $scope.masterOptions.chart.yAxis.tickFormat = d3.format('.02f');
+    $scope.masterOptions.chart.tooltip.contentGenerator = tooltipGenerator.generateTalkVizTooltip;
     $scope.slaveOptions = angular.copy(options)
     $scope.masterOptions.chart.scatter = {
           dispatch:{
@@ -30,6 +35,7 @@ angular.module('emptyChairWidgetApp')
             }
           }
 	}
+
 
     $scope.masterWords = talkParser.remapAndRegroupByTags(data._words);
     
