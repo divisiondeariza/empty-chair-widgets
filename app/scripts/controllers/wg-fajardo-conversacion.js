@@ -29,16 +29,8 @@ angular.module('emptyChairWidgetApp')
             }
           }
 	}
-    $scope.tags = talkParser.getTags(data._words);
-    $scope.selectedTag =  "most_used";
-
-    $scope.$watch("selectedTag", function(){
-         var datamaster = [{
-                key: 'master',
-                values: talkParser.remapWordsWithTag(data._words, $scope.selectedTag),
-            }]
-         $scope.masterWords = datamaster;
-    })
+    $scope.masterWords = talkParser.remapAndRegroupByTags(data._words);
+   
 
 // NOT TESTED 
 

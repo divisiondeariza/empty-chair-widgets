@@ -4,18 +4,12 @@
     <p>
       Instrucciones
     </p>
-    <md-input-container>
-		<md-select ng-model="selectedTag">
-			<!-- <md-option><em>{{selectedTag}}</em></md-option> -->
-			<md-option ng-repeat="tag in tags" ng-value="tag">
-				{{tag}}
-			</md-option>
-		</md-select>
-	</md-input-container>
-    {{tags}}
-    {{selectedTag}}
-    {{masterWords}}
-    <nvd3 class="talk-viz" id='said-words-viz' options=masterOptions data=masterWords></nvd3>
-    <nvd3 class="talk-viz" options=slaveOptions data=data></nvd3>
-{{word}}
+    <div class="row">
+    	<div class="col-md-6">
+    		<nvd3 class="talk-viz" id='said-words-viz' options=masterOptions data=masterWords></nvd3>
+    	</div>
+    	<div class="col-md-6">
+   			 <nvd3 class="talk-viz" options=slaveOptions data=data></nvd3>
+    	</div>
+    </div>
 </div>

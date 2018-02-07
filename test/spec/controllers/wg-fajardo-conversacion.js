@@ -11,7 +11,8 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     data,
     $document,
     talkParser,
-    tagsMock;
+    tagsMock,
+    remappedMock;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $compile, _talkParser_) {
@@ -29,6 +30,8 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     data = {_words:{}};
     tagsMock = ["a", "b"];
     talkParser = _talkParser_;
+    remappedMock = {};
+    spyOn(talkParser, "remapAndRegroupByTags").and.returnValue(remappedMock);
     spyOn(talkParser, "getTags").and.returnValue(tagsMock);
     var html =  "<div id='some-id'>" +
             "<svg>" +
@@ -126,20 +129,9 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
   });
 
   describe('parsing words', function(){
-    it("should set scope.tags correcty", function(){
-      expect(talkParser.getTags).toHaveBeenCalledWith(data._words);
-      expect(scope.tags).toEqual(tagsMock);
-    });
-
     it("Should set masterWords correcty when scope.selectedTag changes", function(){
-      var remappedMock = {};
-      spyOn(talkParser, "remapWordsWithTag").and.returnValue(remappedMock);
-      scope.selectedTag = "sometag"
-      scope.$digest();
-      expect(talkParser.remapWordsWithTag).toHaveBeenCalledWith(data._words, scope.selectedTag);
-      expect(scope.masterWords).toEqual([{
-                                          key: 'master',
-                                          values:remappedMock}]);
+      expect(talkParser.remapAndRegroupByTags).toHaveBeenCalledWith(data._words);
+      expect(scope.masterWords).toEqual(remappedMock);
     })
 
   })

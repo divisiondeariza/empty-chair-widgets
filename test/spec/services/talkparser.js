@@ -109,5 +109,15 @@ describe('Service: talkParser', function () {
       expect(remapped).toEqual(expectedRemmaped);
     });
 
+    it("should remap and regroup by tag", function(){
+      var remapped = talkParser.remapAndRegroupByTags(talkWordObjects);
+      var expectedRemmaped = [
+                              {key: "tag1", values: talkParser.remapWordsWithTag(talkWordObjects, "tag1")},
+                              {key: "tag2", values: talkParser.remapWordsWithTag(talkWordObjects, "tag2")},
+                              {key: "tag3", values: talkParser.remapWordsWithTag(talkWordObjects, "tag3")},
+                              ]
+      expect(remapped).toEqual(expectedRemmaped);                       
+    })
+
   })
 });

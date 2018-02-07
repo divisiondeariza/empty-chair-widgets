@@ -10,9 +10,16 @@
 angular.module('emptyChairWidgetApp')
   .service('talkParser', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    this.classifyByTag = function(talkWordsObject){
+    this.classifyByTag = classifyByTag;
+    this.getTags = getTags;
+    this.remapAndRegroupByTags = remapAndRegroupByTags
+    this.remapAll = remapAll;
+    this.remapWordsWithTag =  remapWordsWithTag;
+    this.remapChosenWords = remapChosenWords;
+
+	function classifyByTag(talkWordsObject){
     	var classifiedWords = {};
-    	this.getTags(talkWordsObject).forEach(function(tag){
+    	getTags(talkWordsObject).forEach(function(tag){
     		classifiedWords[tag] = [];
     	})
     	Object.keys(talkWordsObject).forEach(function(word){
@@ -21,9 +28,9 @@ angular.module('emptyChairWidgetApp')
     		})
     	});
     	return classifiedWords;
-    }
+    };
 
-    this.getTags = function(talkWordsObject){
+    function getTags(talkWordsObject){
     	var tags = []
     	Object.keys(talkWordsObject).forEach(function(word){
     		talkWordsObject[word].tags.forEach(function(tag){
@@ -35,16 +42,26 @@ angular.module('emptyChairWidgetApp')
     	return tags;
     };
 
-    this.remapAll = function(talkWordsObject){
-    	return this.remapChosenWords(talkWordsObject, Object.keys(talkWordsObject))
-    };
+    function remapAndRegroupByTags(talkWordsObject){
+    	var tags = getTags(talkWordsObject);
+    	var remapped = []
+    	return tags.map(function(tag){
+    		return {values: remapWordsWithTag(talkWordsObject, tag),
+    				key:tag}
+    	})
 
-    this.remapWordsWithTag=  function(talkWordsObject, tag){
-    	var words = this.classifyByTag(talkWordsObject)[tag];
-    	return this.remapChosenWords(talkWordsObject, words)
     }
 
-    this.remapChosenWords = function(talkWordsObject, words){
+	function remapAll(talkWordsObject){
+    	return remapChosenWords(talkWordsObject, Object.keys(talkWordsObject))
+    };
+
+  	function remapWordsWithTag(talkWordsObject, tag){
+    	var words = classifyByTag(talkWordsObject)[tag];
+    	return remapChosenWords(talkWordsObject, words)
+    }  
+
+    function remapChosenWords(talkWordsObject, words){
      	var remapped = [];
     	words.forEach(function(word){
     		remapped.push(remapWord(talkWordsObject, word));

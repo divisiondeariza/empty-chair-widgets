@@ -29,6 +29,9 @@
     },
     "tooltip":{
       "hideDelay": 0
+    },
+    "legend":{
+      "radioButtonMode": true
     }
   }
 }
