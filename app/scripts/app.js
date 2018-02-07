@@ -60,7 +60,7 @@ angular
         controller: 'WgFajardoConversacionCtrl',
         controllerAs: 'wgFajardoConversacion',
         resolve:{
-          // data: function(jsonGetter){ return jsonGetter.get('data/timochenko-words');},
+          data: function(jsonGetter){ return jsonGetter.get('data/fajardo-talk');},
           options: function(jsonGetter){ return jsonGetter.get('options/talkviz.conf');} 
         },
       })
