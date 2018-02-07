@@ -38,15 +38,18 @@ describe('Service: talkParser', function () {
                         "word1": {activity:Math.random(),
                                   effectivity: Math.random(),
                                   sentiment: Math.random(),
-                                  magnitude: Math.random() },
+                                  magnitude: Math.random(),
+                                  tags: ["tag1", "tag2"] },
                         "word2": {activity:Math.random(),
                                   effectivity: Math.random(),
                                   sentiment: Math.random(),
-                                  magnitude: Math.random() },
+                                  magnitude: Math.random(),
+                                  tags: ["tag1", "tag3"]  },
                         "word3": {activity:Math.random(),
                                   effectivity: Math.random(),
                                   sentiment: Math.random(),
-                                  magnitude: Math.random() },
+                                  magnitude: Math.random(),
+                                  tags: ["tag2", "tag3"]  },
                       }
     });
 
@@ -85,6 +88,23 @@ describe('Service: talkParser', function () {
                                size: talkWordObjects.word3.activity,
                                shape:"circle",
                                word: "word3" }
+      ];
+      expect(remapped).toEqual(expectedRemmaped);
+    });
+
+    it("should remap only data of tag given of talkWordObjects", function(){
+      var remapped = talkParser.remapWordsWithTag(talkWordObjects, "tag1")
+      var expectedRemmaped = [
+                              {x:talkWordObjects.word1.sentiment,
+                               y:talkWordObjects.word1.magnitude, 
+                               size: talkWordObjects.word1.activity,
+                               shape:"circle",
+                               word: "word1", },
+                              {x:talkWordObjects.word2.sentiment,
+                               y:talkWordObjects.word2.magnitude, 
+                               size: talkWordObjects.word2.activity,
+                               shape:"circle",
+                               word: "word2" }
       ];
       expect(remapped).toEqual(expectedRemmaped);
     });

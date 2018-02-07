@@ -17,10 +17,11 @@ angular
     'ngSanitize',
     'ngTouch',
     'nvd3',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngMaterial'
   ])
-  .config(["$routeProvider",
-    function ($routeProvider) {
+  .config(["$routeProvider", "$mdThemingProvider",
+    function ($routeProvider, $mdThemingProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -67,4 +68,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+      $mdThemingProvider.theme('default').dark();
   }]);

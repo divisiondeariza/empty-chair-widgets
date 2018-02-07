@@ -129,6 +129,17 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     it("should set scope.tags correcty", function(){
       expect(talkParser.getTags).toHaveBeenCalledWith(data._words);
       expect(scope.tags).toEqual(tagsMock);
+    });
+
+    it("Should set masterWords correcty when scope.selectedTag changes", function(){
+      var remappedMock = {};
+      spyOn(talkParser, "remapWordsWithTag").and.returnValue(remappedMock);
+      scope.selectedTag = "sometag"
+      scope.$digest();
+      expect(talkParser.remapWordsWithTag).toHaveBeenCalledWith(data._words, scope.selectedTag);
+      expect(scope.masterWords).toEqual([{
+                                          key: 'master',
+                                          values:remappedMock}]);
     })
 
   })

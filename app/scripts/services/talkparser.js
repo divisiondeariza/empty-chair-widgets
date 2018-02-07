@@ -39,6 +39,11 @@ angular.module('emptyChairWidgetApp')
     	return this.remapChosenWords(talkWordsObject, Object.keys(talkWordsObject))
     };
 
+    this.remapWordsWithTag=  function(talkWordsObject, tag){
+    	var words = this.classifyByTag(talkWordsObject)[tag];
+    	return this.remapChosenWords(talkWordsObject, words)
+    }
+
     this.remapChosenWords = function(talkWordsObject, words){
      	var remapped = [];
     	words.forEach(function(word){

@@ -25,12 +25,22 @@ angular.module('emptyChairWidgetApp')
           dispatch:{
             elementClick: function(event){
             	$scope.selectPoint("said-words-viz", event);
+                console.log("called");
             }
           }
 	}
     $scope.tags = talkParser.getTags(data._words);
+    $scope.selectedTag =  "most_used";
 
-// NOT TESTED
+    $scope.$watch("selectedTag", function(){
+         var datamaster = [{
+                key: 'master',
+                values: talkParser.remapWordsWithTag(data._words, $scope.selectedTag),
+            }]
+         $scope.masterWords = datamaster;
+    })
+
+// NOT TESTED 
 
     $scope.data = generateData(5,5);
 
@@ -57,7 +67,7 @@ angular.module('emptyChairWidgetApp')
                     word: "some word" + i
                 });
             }
-        }
+        } 
         return data;
 	}
   }]);
