@@ -83,6 +83,13 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
         var formater = options.chart.yAxis.tickFormat
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
       });
+
+      it("should call selectPoint when clicked", function(){
+        var eventMock = {}
+        spyOn(scope, "selectPoint");
+        options.chart.scatter.dispatch.elementClick(eventMock);
+        expect(scope.selectPoint).toHaveBeenCalledWith("said-words-viz", eventMock);
+      })
     });
 
     describe("slave option", function(){
@@ -103,6 +110,10 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
         var formater = options.chart.yAxis.tickFormat
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
       });
+
+      it("should not be defined chart.scatter.dispatch", function(){
+        expect(options.chart.scatter.dispatch).not.toBeDefined();
+      })
     })
   })
 });

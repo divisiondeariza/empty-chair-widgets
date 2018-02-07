@@ -9,11 +9,6 @@
  */
 angular.module('emptyChairWidgetApp')
   .controller('WgFajardoConversacionCtrl', ["$scope", "options", function ($scope, options) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
     $scope.selectPoint = function(id, event){
     	var element = angular.element("#" + id);
         element.find(".nv-point").removeClass("selected");
@@ -24,17 +19,17 @@ angular.module('emptyChairWidgetApp')
     $scope.masterOptions =  options;
     $scope.masterOptions.chart.xAxis.tickFormat = d3.format('.02f');
     $scope.masterOptions.chart.yAxis.tickFormat = d3.format('.02f');
+    $scope.slaveOptions = angular.copy(options)
+    $scope.masterOptions.chart.scatter = {
+          dispatch:{
+            elementClick: function(event){
+            	$scope.selectPoint("said-words-viz", event);
+            }
+          }
+	}
 // NOT TESTED
 
 
-    $scope.slaveOptions = angular.copy(options)
- //    $scope.masterOptions.chart.scatter = {
- //          dispatch:{
- //            elementClick: function(event){
- //            	$scope.selectPoint("said-words-viz", event);
- //            }
- //          }
-	// }
     $scope.data = generateData(5,5);
 
     /* Random Data Generator (took from nvd3.org) */
