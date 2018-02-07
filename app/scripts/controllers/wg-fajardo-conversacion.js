@@ -14,9 +14,28 @@ angular.module('emptyChairWidgetApp')
       'AngularJS',
       'Karma'
     ];
+    $scope.selectPoint = function(id, event){
+    	var element = angular.element("#" + id);
+        element.find(".nv-point").removeClass("selected");
+        var subElement = element.find(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
+        angular.element(subElement).addClass("selected");
+        $scope.word =  event.point.word;
+	}
+    $scope.masterOptions =  options;
+    $scope.masterOptions.chart.xAxis.tickFormat = d3.format('.02f');
+    $scope.masterOptions.chart.yAxis.tickFormat = d3.format('.02f');
 // NOT TESTED
-    $scope.options =  options;
-     $scope.data = generateData(5,5);
+
+
+    $scope.slaveOptions = angular.copy(options)
+ //    $scope.masterOptions.chart.scatter = {
+ //          dispatch:{
+ //            elementClick: function(event){
+ //            	$scope.selectPoint("said-words-viz", event);
+ //            }
+ //          }
+	// }
+    $scope.data = generateData(5,5);
 
     /* Random Data Generator (took from nvd3.org) */
     function generateData(groups, points) { //# groups,# points per group
@@ -38,7 +57,7 @@ angular.module('emptyChairWidgetApp')
                     y: Math.random() - 0.1,
                     size: Math.random() * 5,
                     shape: shapes[0],
-                    word: "some word"
+                    word: "some word" + i
                 });
             }
         }

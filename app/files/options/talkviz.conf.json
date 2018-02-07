@@ -26,6 +26,9 @@
     "yAxis": {
       "axisLabel": "Magnitud",
       "axisLabelDistance": -5
+    },
+    "tooltip":{
+      "hideDelay": 0
     }
   }
 }
