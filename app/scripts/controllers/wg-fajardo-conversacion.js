@@ -15,7 +15,9 @@ angular.module('emptyChairWidgetApp')
         element.find(".nv-point").removeClass("selected");
         var subElement = element.find(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
         angular.element(subElement).addClass("selected");
-        $scope.word =  event.point.word;
+        $scope.slaveWords = [{key:"respuestas", values: talkParser.remapAll(data[event.point.word])}];
+        $scope.$digest();
+
 	}
     $scope.masterOptions =  options;
     $scope.masterOptions.chart.xAxis.tickFormat = d3.format('.02f');
@@ -25,41 +27,16 @@ angular.module('emptyChairWidgetApp')
           dispatch:{
             elementClick: function(event){
             	$scope.selectPoint("said-words-viz", event);
-                console.log("called");
             }
           }
 	}
+
     $scope.masterWords = talkParser.remapAndRegroupByTags(data._words);
-   
-
-// NOT TESTED 
-
-    $scope.data = generateData(5,5);
-
-    /* Random Data Generator (took from nvd3.org) */
-    function generateData(groups, points) { //# groups,# points per group
-        var data = [],
-            shapes = ['circle'],
-            random = d3.random.normal();
+    
+    //NOT TESTED
+    $scope.slaveWords = [];
+    
 
 
 
-        for (var i = 0; i < groups; i++) {
-            data.push({
-                key: 'Group ' + i,
-                values: [],
-            });
-
-            for (var j = 0; j < points; j++) {
-                data[i].values.push({
-                    x: Math.random()*2 -1,
-                    y: Math.random() - 0.1,
-                    size: Math.random() * 5,
-                    shape: shapes[0],
-                    word: "some word" + i
-                });
-            }
-        } 
-        return data;
-	}
   }]);

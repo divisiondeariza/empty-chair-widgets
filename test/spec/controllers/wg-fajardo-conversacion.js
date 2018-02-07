@@ -58,6 +58,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     var event;
     beforeEach(inject(function($compile){
       event = {seriesIndex: 2, pointIndex:4, point:{word: "selected-word"}};
+      data["selected-word"] = {};
     }));
 
     it('should toggle the select class given the directive id and the event', inject(function($compile){
@@ -65,11 +66,14 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
       var elementFound = $document.find(".selected")[0];
       expect(elementFound.className.baseVal).toEqual('nv-point nv-point-4 selected')
 
-    }))
+    }));
 
-    it('should update word of selected in scope', function(){
+    it('should update slaveWords', function(){
+      var remappedMock = {remapped: Math.random()}
+      spyOn(talkParser, "remapAll").and.returnValue(remappedMock);
       scope.selectPoint('some-id', event);
-      expect(scope.word).toEqual(event.point.word);
+      expect(talkParser.remapAll).toHaveBeenCalledWith(data["selected-word"]);
+      expect(scope.slaveWords).toEqual([{key:"respuestas", values: remappedMock}]);
     })
 
   });
@@ -132,7 +136,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     it("Should set masterWords correcty when scope.selectedTag changes", function(){
       expect(talkParser.remapAndRegroupByTags).toHaveBeenCalledWith(data._words);
       expect(scope.masterWords).toEqual(remappedMock);
-    })
+    });
 
   })
 });
