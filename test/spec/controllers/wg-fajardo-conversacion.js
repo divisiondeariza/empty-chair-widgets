@@ -77,7 +77,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
       spyOn(talkParser, "remapAll").and.returnValue(remappedMock);
       scope.selectPoint('some-id', event);
       expect(talkParser.remapAll).toHaveBeenCalledWith(data["selected-word"]);
-      expect(scope.slaveWords).toEqual([{key:"respuestas", values: remappedMock}]);
+      expect(scope.slaveWords).toEqual([{key:"selected-word", values: remappedMock}]);
     })
 
   });
@@ -135,7 +135,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
         var formater = options.chart.yAxis.tickFormat
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
       });
-      
+
       it("should set tooltop.contentGenerator", function(){
         var eventMock = {};
         options.chart.tooltip.contentGenerator(eventMock);
@@ -144,6 +144,10 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
 
       it("should not be defined chart.scatter.dispatch", function(){
         expect(options.chart.scatter.dispatch).not.toBeDefined();
+      });
+
+      it("should define noData text", function(){
+        expect(options.chart.noData).toEqual("Seleccione una de las palabras a la izquierda");
       })
     })
   });

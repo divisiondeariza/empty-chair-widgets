@@ -19,7 +19,7 @@ angular.module('emptyChairWidgetApp')
         element.find(".nv-point").removeClass("selected");
         var subElement = element.find(".nv-series-"+event.seriesIndex + " .nv-point-" + event.pointIndex);
         angular.element(subElement).addClass("selected");
-        $scope.slaveWords = [{key:"respuestas", values: talkParser.remapAll(data[event.point.word])}];
+        $scope.slaveWords = [{key:event.point.word, values: talkParser.remapAll(data[event.point.word])}];
         $scope.$digest();
 
 	}
@@ -28,6 +28,7 @@ angular.module('emptyChairWidgetApp')
     $scope.masterOptions.chart.yAxis.tickFormat = d3.format('.02f');
     $scope.masterOptions.chart.tooltip.contentGenerator = tooltipGenerator.generateTalkVizTooltip;
     $scope.slaveOptions = angular.copy(options)
+    $scope.slaveOptions.chart.noData = "Seleccione una de las palabras a la izquierda";
     $scope.masterOptions.chart.scatter = {
           dispatch:{
             elementClick: function(event){
