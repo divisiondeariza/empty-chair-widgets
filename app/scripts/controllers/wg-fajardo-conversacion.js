@@ -58,7 +58,6 @@ angular.module('emptyChairWidgetApp')
                 });
             }
         }
-
         return data;
 	}
   }]);

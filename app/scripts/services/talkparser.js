@@ -35,4 +35,25 @@ angular.module('emptyChairWidgetApp')
     	return tags;
     };
 
+    this.remapAll = function(talkWordsObject){
+    	return this.remapChosenWords(talkWordsObject, Object.keys(talkWordsObject))
+    };
+
+    this.remapChosenWords = function(talkWordsObject, words){
+     	var remapped = [];
+    	words.forEach(function(word){
+    		remapped.push(remapWord(talkWordsObject, word));
+    	})
+    	return remapped;   	
+    }
+
+    function remapWord(talkWordsObject, word){
+    	return	{
+	    			x:talkWordsObject[word].sentiment,
+	    			y:talkWordsObject[word].magnitude,
+	    			size:talkWordsObject[word].activity,
+	    			shape:"circle",
+	    			word: word
+    			}
+    };
 });
