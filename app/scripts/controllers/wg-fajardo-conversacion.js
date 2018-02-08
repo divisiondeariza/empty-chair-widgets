@@ -37,11 +37,14 @@ angular.module('emptyChairWidgetApp')
             }
           }
 	}
-
+    $scope.masterOptions.chart.callback = function(chart){
+        chart.dispatch.changeState({disabled: [0,1,1,1]});
+    }
 
     $scope.masterWords = talkParser.remapAndRegroupByTags(data._words);
     
     //NOT TESTED
+
     $scope.slaveWords = [];
     
 
