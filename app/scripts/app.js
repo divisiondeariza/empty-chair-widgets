@@ -28,11 +28,6 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .when('/actionbtn', {
         templateUrl: 'views/actionbtn.html',
         controller: 'ActionbtnCtrl',
@@ -58,8 +53,8 @@ angular
       })
       .when('/widgets/fajardo-conversacion', {
         templateUrl: 'views/wg-fajardo-conversacion.html',
-        controller: 'WgFajardoConversacionCtrl',
-        controllerAs: 'wgFajardoConversacion',
+        controller: 'TalkvizCtrl',
+        controllerAs: 'talkviz',
         resolve:{
           data: function(jsonGetter){ return jsonGetter.get('data/fajardo-talk');},
           options: function(jsonGetter){ return jsonGetter.get('options/talkviz.conf');} 

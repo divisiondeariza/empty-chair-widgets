@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: WgFajardoConversacionCtrl', function () {
+describe('Controller: TalkvizCtrl', function () {
 
   // load the controller's module
   beforeEach(module('emptyChairWidgetApp'));
 
-  var WgFajardoConversacionCtrl,
+  var TalkvizCtrl,
     scope,
     options,
     data,
@@ -13,7 +13,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
     talkParser,
     tooltopGenerator,
     tagsMock,
-    remappedMock;
+    remappedMock;;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $compile, _talkParser_, _tooltipGenerator_) {
@@ -52,7 +52,7 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
            "<div>"     
     $document = angular.element(document);
     $document.find('body').append(html);
-    WgFajardoConversacionCtrl = $controller('WgFajardoConversacionCtrl', {
+    TalkvizCtrl = $controller('TalkvizCtrl', {
       $scope: scope,
       options: options,
       data: data
