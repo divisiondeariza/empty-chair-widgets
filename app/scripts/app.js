@@ -60,6 +60,15 @@ angular
           options: function(jsonGetter){ return jsonGetter.get('options/talkviz.conf');} 
         },
       })
+      .when('/widgets/petro-conversacion', {
+        templateUrl: 'views/wg-petro-conversacion.html',
+        controller: 'TalkvizCtrl',
+        controllerAs: 'talkviz',
+        resolve:{
+          data: function(jsonGetter){ return jsonGetter.get('data/petro-talk');},
+          options: function(jsonGetter){ return jsonGetter.get('options/talkviz.conf');} 
+        },
+      })
       .otherwise({
         redirectTo: '/'
       });
