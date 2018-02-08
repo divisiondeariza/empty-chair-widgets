@@ -29,6 +29,7 @@ angular.module('emptyChairWidgetApp')
     $scope.masterOptions.chart.tooltip.contentGenerator = tooltipGenerator.generateTalkVizTooltip;
     $scope.slaveOptions = angular.copy(options)
     $scope.slaveOptions.chart.noData = "Seleccione una de las palabras a la izquierda";
+    $scope.slaveOptions.chart.color.unshift("#831dc6");
     $scope.masterOptions.chart.scatter = {
           dispatch:{
             elementClick: function(event){

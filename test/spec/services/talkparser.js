@@ -39,17 +39,17 @@ describe('Service: talkParser', function () {
                                   effectivity: Math.random(),
                                   sentiment: Math.random(),
                                   magnitude: Math.random(),
-                                  tags: ["tag1", "tag2"] },
+                                  tags: ["most_used", "highest_sentiment"] },
                         "word2": {activity:Math.random(),
                                   effectivity: Math.random(),
                                   sentiment: Math.random(),
                                   magnitude: Math.random(),
-                                  tags: ["tag1", "tag3"]  },
+                                  tags: ["most_used", "lowest_sentiment"]  },
                         "word3": {activity:Math.random(),
                                   effectivity: Math.random(),
                                   sentiment: Math.random(),
                                   magnitude: Math.random(),
-                                  tags: ["tag2", "tag3"]  },
+                                  tags: ["highest_sentiment", "most_effective"]  },
                       }
     });
 
@@ -93,7 +93,7 @@ describe('Service: talkParser', function () {
     });
 
     it("should remap only data of tag given of talkWordObjects", function(){
-      var remapped = talkParser.remapWordsWithTag(talkWordObjects, "tag1")
+      var remapped = talkParser.remapWordsWithTag(talkWordObjects, "most_used")
       var expectedRemmaped = [
                               {x:talkWordObjects.word1.sentiment,
                                y:talkWordObjects.word1.magnitude, 
@@ -112,12 +112,19 @@ describe('Service: talkParser', function () {
     it("should remap and regroup by tag", function(){
       var remapped = talkParser.remapAndRegroupByTags(talkWordObjects);
       var expectedRemmaped = [
-                              {key: "tag1", values: talkParser.remapWordsWithTag(talkWordObjects, "tag1")},
-                              {key: "tag2", values: talkParser.remapWordsWithTag(talkWordObjects, "tag2")},
-                              {key: "tag3", values: talkParser.remapWordsWithTag(talkWordObjects, "tag3")},
+                              {key: talkParser.tagsTranslation["most_used"], 
+                               values: talkParser.remapWordsWithTag(talkWordObjects, "most_used")},
+                              {key: talkParser.tagsTranslation["highest_sentiment"], 
+                               values: talkParser.remapWordsWithTag(talkWordObjects, "highest_sentiment")},
+                              {key: talkParser.tagsTranslation["lowest_sentiment"], 
+                               values: talkParser.remapWordsWithTag(talkWordObjects, "lowest_sentiment")},
+                              {key: talkParser.tagsTranslation["most_effective"], 
+                               values: talkParser.remapWordsWithTag(talkWordObjects, "most_effective")},
                               ]
       expect(remapped).toEqual(expectedRemmaped);                       
-    })
+    });
+
+
 
   })
 });

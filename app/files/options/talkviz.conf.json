@@ -1,7 +1,7 @@
 {
   "chart": {
     "type": "scatterChart",
-    "height": 450,
+    "height": 300,
     "color": [
       "#1f77b4",
       "#ff7f0e",
@@ -24,14 +24,20 @@
       "axisLabel": "Sentimiento"
     },
     "yAxis": {
-      "axisLabel": "Magnitud",
+      "axisLabel": "Contundencia",
       "axisLabelDistance": -5
     },
     "tooltip":{
       "hideDelay": 0
     },
     "legend":{
-      "radioButtonMode": true
-    }
+      "radioButtonMode": false,
+      "padding": 40,
+      "width": 1000,
+      "rightAlign": false,
+      "top": 2,
+      "bottom": 20
+    },
+    "forceX": [0]
   }
 }

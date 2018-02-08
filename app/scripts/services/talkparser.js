@@ -10,12 +10,23 @@
 angular.module('emptyChairWidgetApp')
   .service('talkParser', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
+    
+    var tagsTranslation = {
+                            "most_effective": "Las más efectivas",
+                            "most_used":"Las más usadas",
+                            "highest_sentiment": "Las más positivas",
+                            "lowest_sentiment": "Las más negativas",
+                            
+                           }
+
+    this.tagsTranslation = tagsTranslation;
     this.classifyByTag = classifyByTag;
     this.getTags = getTags;
     this.remapAndRegroupByTags = remapAndRegroupByTags
     this.remapAll = remapAll;
     this.remapWordsWithTag =  remapWordsWithTag;
     this.remapChosenWords = remapChosenWords;
+
 
 	function classifyByTag(talkWordsObject){
     	var classifiedWords = {};
@@ -47,7 +58,7 @@ angular.module('emptyChairWidgetApp')
     	var remapped = []
     	return tags.map(function(tag){
     		return {values: remapWordsWithTag(talkWordsObject, tag),
-    				key:tag}
+    				key:tagsTranslation[tag]}
     	})
 
     }

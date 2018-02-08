@@ -27,7 +27,8 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
       yAxis:{
         tickFormat: function(v){return v}
       },
-      tooltip: {}
+      tooltip: {},
+      color:["#fff"]
     }};
     data = {_words:{}};
     tagsMock = ["a", "b"];
@@ -148,7 +149,11 @@ describe('Controller: WgFajardoConversacionCtrl', function () {
 
       it("should define noData text", function(){
         expect(options.chart.noData).toEqual("Seleccione una de las palabras a la izquierda");
-      })
+      });      
+
+      it("First color should be 831dc6", function(){
+        expect(options.chart.color[0]).toEqual("#831dc6");
+      });
     })
   });
 
