@@ -38,6 +38,7 @@ angular.module('emptyChairWidgetApp')
 	    }
 
 	    $scope.masterWords = talkParser.remapAndRegroupByTags(data._words);
+	    $scope.masterOptions.chart.forceY = [0]; 
 	    
 	    //NOT TESTED
 

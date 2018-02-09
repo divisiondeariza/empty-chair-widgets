@@ -122,8 +122,14 @@ describe('Controller: TalkvizCtrl', function () {
         spyOn(chartMock.dispatch, "changeState");
         options.chart.callback(chartMock);
         expect(chartMock.dispatch.changeState).toHaveBeenCalledWith({disabled: [0,1,1,1]});
+      });
+
+      it("should set chart.forceY as [0]", function(){
+        expect(options.chart.forceY).toEqual([0]);
       })
     });
+
+
 
     describe("slave option", function(){
       beforeEach(function(){

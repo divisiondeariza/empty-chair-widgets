@@ -38,6 +38,9 @@
       "top": 2,
       "bottom": 20
     },
-    "forceX": [0]
+    "forceX": [0],
+    "zoom":{
+      "enabled": true
+    }
   }
 }
