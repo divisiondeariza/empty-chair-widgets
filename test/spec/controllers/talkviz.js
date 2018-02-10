@@ -99,9 +99,13 @@ describe('Controller: TalkvizCtrl', function () {
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
       });
 
-      it("should set xAxis.tickFormat", function(){
+      it("should set yAxis.tickFormat", function(){
         var formater = options.chart.yAxis.tickFormat
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
+      });
+
+      it("should set xAxis.tickValues", function(){
+        expect(options.chart.xAxis.tickValues).toEqual([-1, .75, -.25, 0 ,.25, .75, 1]);
       });
 
       it("should set tooltop.contentGenerator", function(){
@@ -145,9 +149,13 @@ describe('Controller: TalkvizCtrl', function () {
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
       });
 
-      it("should set xAxis.tickFormat", function(){
+      it("should set yAxis.tickFormat", function(){
         var formater = options.chart.yAxis.tickFormat
         expect(formater(Math.PI)).toEqual(d3.format('.02f')(Math.PI));
+      });
+
+      it("should set xAxis.tickValues", function(){
+        expect(options.chart.xAxis.tickValues).toEqual([-1, .75, -.25, 0 ,.25, .75, 1]);
       });
 
       it("should set tooltop.contentGenerator", function(){
@@ -175,6 +183,10 @@ describe('Controller: TalkvizCtrl', function () {
       expect(talkParser.remapAndRegroupByTags).toHaveBeenCalledWith(data._words);
       expect(scope.masterWords).toEqual(remappedMock);
     });
+
+    it("should selt slaveWords as empty array by default", function(){
+      expect(scope.slaveWords).toEqual([]);
+    })
 
   })
 });

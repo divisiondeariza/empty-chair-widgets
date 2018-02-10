@@ -22,11 +22,7 @@ angular.module('emptyChairWidgetApp')
 	    $scope.masterOptions =  options;
 	    $scope.masterOptions.chart.xAxis.tickFormat = d3.format('.02f');
 	    $scope.masterOptions.chart.yAxis.tickFormat = d3.format('.02f');
-
-	    // Not Tested
 	    $scope.masterOptions.chart.xAxis.tickValues = [-1, .75, -.25, 0 ,.25, .75, 1];
-
-	    // end of not tested 
 	    $scope.masterOptions.chart.tooltip.contentGenerator = tooltipGenerator.generateTalkVizTooltip;
 	    $scope.slaveOptions = angular.copy(options)
 	    $scope.slaveOptions.chart.noData = "Seleccione una de las palabras a la izquierda";
@@ -38,6 +34,7 @@ angular.module('emptyChairWidgetApp')
 	            }
 	          }
 		}
+
 	    $scope.masterOptions.chart.callback = function(chart){
 
 
@@ -52,13 +49,7 @@ angular.module('emptyChairWidgetApp')
 	    }
 
 	    $scope.masterWords = talkParser.remapAndRegroupByTags(data._words);
+	    $scope.slaveWords = [];
 	    $scope.masterOptions.chart.forceY = [0]; 
 	    
-	    //NOT TESTED
-
-	    $scope.slaveWords = [];
-
-
-
-
   }]);
