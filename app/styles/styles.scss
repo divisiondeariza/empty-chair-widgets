@@ -68,8 +68,21 @@ h1{
 				stroke-opacity: #F7941E
 			}
 			.zero line{
-				stroke:#f4ed00;
+				stroke:#ffed00;
 				stroke-width:3;
+			}
+
+			.positive line{
+				// stroke:#ff0000;
+				stroke-width:3;
+				stroke-dasharray: 5;
+
+			}	
+
+			.negative line{
+				// stroke:#00ff00;
+				stroke-width:3;
+				stroke-dasharray: 5;
 			}	
 
 		}
