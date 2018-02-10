@@ -31,6 +31,12 @@ angular.module('emptyChairWidgetApp')
 	          dispatch:{
 	            elementClick: function(event){
 	            	$scope.selectPoint("said-words-viz", event);
+	                // Not Tested
+						d3.selectAll(".tick")
+						.classed("positive", function(d,i){return d==0.25})
+						.classed("negative", function(d,i){return d==-0.25})
+					// end of not tested 
+
 	            }
 	          }
 		}
