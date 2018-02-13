@@ -40,7 +40,9 @@
     },
     "forceX": [0],
     "zoom":{
-      "enabled": true
+      "enabled": true,
+      "horizontalOff": true,
+      "verticalOff": true
     }
   }
 }

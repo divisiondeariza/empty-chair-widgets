@@ -121,13 +121,6 @@ describe('Controller: TalkvizCtrl', function () {
         expect(scope.selectPoint).toHaveBeenCalledWith("said-words-viz", eventMock);
       });
 
-      it("should only set first group of words enabled by default", function(){
-        var chartMock = {dispatch:{changeState:function(state){}}}
-        spyOn(chartMock.dispatch, "changeState");
-        options.chart.callback(chartMock);
-        expect(chartMock.dispatch.changeState).toHaveBeenCalledWith({disabled: [0,1,1,1]});
-      });
-
       it("should set chart.forceY as [0]", function(){
         expect(options.chart.forceY).toEqual([0]);
       })

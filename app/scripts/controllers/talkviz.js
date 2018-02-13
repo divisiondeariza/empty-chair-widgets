@@ -44,7 +44,7 @@ angular.module('emptyChairWidgetApp')
 	    $scope.masterOptions.chart.callback = function(chart){
 
 
-	        chart.dispatch.changeState({disabled: [0,1,1,1]});
+	        // chart.dispatch.changeState({disabled: [0,1,1,1]});
 
 	    // Not Tested
 			d3.selectAll(".tick")
