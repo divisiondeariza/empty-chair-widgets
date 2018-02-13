@@ -1,0 +1,48 @@
+{
+  "chart": {
+    "type": "scatterChart",
+    "height": 300,
+    "color": [
+      "#1f77b4",
+      "#ff7f0e",
+      "#2ca02c",
+      "#d62728",
+      "#9467bd",
+      "#8c564b",
+      "#e377c2",
+      "#7f7f7f",
+      "#bcbd22",
+      "#17becf"
+    ],
+    "scatter": {
+      "onlyCircles": false
+    },
+    "showDistX": false,
+    "showDistY": false,
+    "duration": 350,
+    "xAxis": {
+      "axisLabel": "Sentimiento"
+    },
+    "yAxis": {
+      "axisLabel": "Contundencia",
+      "axisLabelDistance": -5
+    },
+    "tooltip":{
+      "hideDelay": 0
+    },
+    "legend":{
+      "radioButtonMode": false,
+      "padding": 40,
+      "width": 1000,
+      "rightAlign": false,
+      "top": 2,
+      "bottom": 20
+    },
+    "forceX": [0],
+    "zoom":{
+      "enabled": true,
+      "horizontalOff": true,
+      "verticalOff": true
+    }
+  }
+}
